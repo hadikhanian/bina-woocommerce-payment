@@ -1,0 +1,4 @@
+*.txt
+*.pot~
+*.po~
+vendor

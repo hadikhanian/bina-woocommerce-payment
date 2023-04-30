@@ -1,0 +1,39 @@
+# Copyright (C) 2021 Hadi Khanian
+msgid ""
+msgstr ""
+"Project-Id-Version: bina-woocommerce-payment 1.0.0\n"
+"Report-Msgid-Bugs-To: https://plugin_website/\n"
+"POT-Creation-Date: 2023-04-30 21:47+0000\n"
+"PO-Revision-Date: 2023-04-30 21:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: bina-woocommerce-payment\n"
+"X-Loco-Version: 2.6.4; wp-6.2"
+
+#. Name of the plugin
+msgid "Bina WooCommerce Payment"
+msgstr "@ افزونه درگاه پرداخت ووکامرس بینا"
+
+#. Author of the plugin
+msgid "Hadi Khanian"
+msgstr "هادی خانیان"
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.binacity.com"
+msgstr "https://www.binacity.com"
+
+#. Description of the plugin
+msgid ""
+"This plugin will help you connect all Iranian, cryptocurrency, and "
+"international payment gateways to your WooCommerce store with just one "
+"plugin."
+msgstr ""
+"این افزونه به شما کمک خواهد کرد تا همه درگاه پرداخت های ایرانی، رمز ارز و "
+"بین اللملی را با یک افزونه به ووکارس و فروشگاه خود متصل کنید."
