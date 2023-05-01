@@ -4,7 +4,7 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Zarinpal extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Aqayepardakht extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
@@ -33,9 +33,8 @@ class Bina_Woocommerce_Payment_Zarinpal extends WC_Payment_Gateway
 				'type'        => 'select',
 				'default'     => 'normal',
 				'options'     => array(
-					'normal'    => __('Normal', 'bina-woocommerce-payment'),
-					'zaringate' => __('Zaringate', 'bina-woocommerce-payment'),
-					'sandbox'   => __('Sandbox', 'bina-woocommerce-payment'),
+					'normal'  => __('Normal', 'bina-woocommerce-payment'),
+					'sandbox' => __('Sandbox', 'bina-woocommerce-payment'),
 				),
 				'description' => __('Select a payment gateway mode.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,

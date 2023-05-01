@@ -2,8 +2,10 @@
 
 namespace Bina\WoocommercePayment\Core;
 
+use WC_Order;
+use Throwable;
 use WC_Payment_Gateway;
-use Shetabit\Multipay\Drivers\Local\Local;
+use Shetabit\Multipay\Payment;
 
 class Bina_Woocommerce_Payment_Local extends WC_Payment_Gateway
 {
@@ -15,73 +17,31 @@ class Bina_Woocommerce_Payment_Local extends WC_Payment_Gateway
 		$this->id                 = 'bina_woocommerce_payment_local';
 		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Test Method', 'bina-woocommerce-payment');
 		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Test Method', 'bina-woocommerce-payment');
-		$this->icon               = '/images/asanpardakht.png';
-		$this->form_fields        = $this->form_fields();
-
-		// Create Form Fields
-		$this->init_form_fields();
-		$this->init_settings();
-
-		// Set Title and Description Values from Options
-		$this->title       = $this->get_option('title');
-		$this->description = $this->get_option('description');
-
-		// Update Options Hook
-		if ( version_compare(WOOCOMMERCE_VERSION, '2.0.0', '>=') ) {
-			add_action('woocommerce_update_options_payment_gateways_'.$this->id, array($this, 'process_admin_options'));
-		} else {
-			add_action('woocommerce_update_options_payment_gateways', array($this, 'process_admin_options'));
-		}
-
-		// Send to Payment Gateway & Return From Gateway
-		add_action('woocommerce_receipt_'.$this->id, [$this, 'send']);
-		add_action('woocommerce_api_'.$this->id, [$this, 'verify']);
+		$this->construct();
 	}
 
 	public function form_fields() : array
 	{
-		return [
-			'header'      => [
-				'type'  => 'title',
-				'title' => __('Settings', 'bina-woocommerce-payment'),
-			],
-			'enabled'     => array(
-				'title'       => __('Enable', 'woocommerce'),
-				'label'       => __('Enable', 'woocommerce'),
-				'type'        => 'checkbox',
-				'description' => '',
-				'default'     => 'no',
-			),
-			'title'       => array(
-				'title' => __('Title', 'woocommerce'),
-				'type'  => 'text',
-			),
-			'description' => array(
-				'title'   => __('Description', 'woocommerce'),
-				'type'    => 'textarea',
-				'default' => '',
-			),
-		];
+		return $this->settings();
 	}
 
-	public function paymentConfig() : array
+	public function send($order_id)
 	{
-		return [
-			'default' => 'local',
-			'drivers' => [
-				'local' => [
-					'callbackUrl'  => null,
-					'title'        => 'درگاه پرداخت تست',
-					'description'  => 'این درگاه *صرفا* برای تست صحت روند پرداخت و لغو پرداخت میباشد',
-					'orderLabel'   => 'شماره سفارش',
-					'amountLabel'  => 'مبلغ قابل پرداخت',
-					'payButton'    => 'پرداخت موفق',
-					'cancelButton' => 'پرداخت ناموفق',
-				],
-			],
-			'map'     => [
-				'local' => Local::class,
-			],
-		];
+		$order    = new WC_Order($order_id);
+		$callback = add_query_arg('wc_order', $order_id, WC()->api_request_url($this->id));
+
+		try {
+			$invoice = $this->make_invoice($order);
+			$payment = new Payment($this->paymentConfig());
+			$payment->callbackUrl($callback)->purchase($invoice, function($driver, $transactionId) use ($order) {
+				update_post_meta($order->get_id(), '_bina_woocommerce_payment_transaction_id', $transactionId);
+				update_post_meta($order->get_id(), '_bina_woocommerce_payment_driver', get_class($this));
+			});
+			echo $payment->pay()->render();
+		} catch ( Throwable $e ) {
+			wc_add_notice(__('Payment Error', 'bina-woocommerce-payment').' => '.$e->getMessage(), 'error');
+
+			return $e->getMessage();
+		}
 	}
 }

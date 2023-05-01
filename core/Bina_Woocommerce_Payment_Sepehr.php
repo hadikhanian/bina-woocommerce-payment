@@ -4,16 +4,16 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Sep extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Sepehr extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_sep';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sep', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sep', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_sepehr';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sepehr', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sepehr', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 

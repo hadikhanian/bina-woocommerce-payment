@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Provide a public-facing view for the plugin
+ * Provide a admin area view for the plugin
  *
- * This file is used to markup the public-facing aspects of the plugin.
+ * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://www.binacity.com
  * @since      1.0.0
  *
  * @package    Bina_Woocommerce_Payment
- * @subpackage Bina_Woocommerce_Payment/public/partials
+ * @subpackage Bina_Woocommerce_Payment/admin/partials
  */
 ?>
 

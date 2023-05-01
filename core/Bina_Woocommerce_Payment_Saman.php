@@ -4,16 +4,16 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Sadad extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Saman extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_sadad';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sadad', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sadad', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_saman';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Saman', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Saman', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 
@@ -22,20 +22,8 @@ class Bina_Woocommerce_Payment_Sadad extends WC_Payment_Gateway
 		$settings = $this->settings();
 
 		$config = [
-			'key'        => array(
-				'title'       => __('Key', 'bina-woocommerce-payment'),
-				'type'        => 'textarea',
-				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
-				'desc_tip'    => true,
-			),
 			'merchantId' => array(
 				'title'       => __('Merchant ID', 'bina-woocommerce-payment'),
-				'type'        => 'text',
-				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
-				'desc_tip'    => true,
-			),
-			'terminalId' => array(
-				'title'       => __('Terminal ID', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,

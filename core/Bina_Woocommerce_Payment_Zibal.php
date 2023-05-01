@@ -4,16 +4,16 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Zarinpal extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Zibal extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_zarinpal';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Zarinpal', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Zarinpal', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_zibal';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Zibal', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Zibal', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 
@@ -33,9 +33,8 @@ class Bina_Woocommerce_Payment_Zarinpal extends WC_Payment_Gateway
 				'type'        => 'select',
 				'default'     => 'normal',
 				'options'     => array(
-					'normal'    => __('Normal', 'bina-woocommerce-payment'),
-					'zaringate' => __('Zaringate', 'bina-woocommerce-payment'),
-					'sandbox'   => __('Sandbox', 'bina-woocommerce-payment'),
+					'normal' => __('Normal', 'bina-woocommerce-payment'),
+					'direct' => __('Direct', 'bina-woocommerce-payment'),
 				),
 				'description' => __('Select a payment gateway mode.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,

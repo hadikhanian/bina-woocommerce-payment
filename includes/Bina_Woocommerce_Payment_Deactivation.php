@@ -25,16 +25,16 @@ namespace Bina\WoocommercePayment\Includes;
 class Bina_Woocommerce_Payment_Deactivation
 {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate()
-	{
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate()
+    {
 
-	}
+    }
 
 }

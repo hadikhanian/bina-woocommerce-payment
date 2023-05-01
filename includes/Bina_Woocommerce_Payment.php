@@ -74,7 +74,7 @@ class Bina_Woocommerce_Payment
 	 */
 	public function __construct()
 	{
-		if (defined('BINA_WOOCOMMERCE_PAYMENT_VERSION')) {
+		if ( defined('BINA_WOOCOMMERCE_PAYMENT_VERSION') ) {
 			$this->version = BINA_WOOCOMMERCE_PAYMENT_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -86,6 +86,50 @@ class Bina_Woocommerce_Payment
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+	}
+
+	/**
+	 * The name of the plugin used to uniquely identify it within the context of
+	 * WordPress and to define internationalization functionality.
+	 *
+	 * @return    string    The name of the plugin.
+	 * @since     1.0.0
+	 */
+	public function get_plugin_name() : string
+	{
+		return $this->plugin_name;
+	}
+
+	/**
+	 * Retrieve the version number of the plugin.
+	 *
+	 * @return    string    The version number of the plugin.
+	 * @since     1.0.0
+	 */
+	public function get_version() : string
+	{
+		return $this->version;
+	}
+
+	/**
+	 * Run the loader to execute all the hooks with WordPress.
+	 *
+	 * @since    1.0.0
+	 */
+	public function run()
+	{
+		$this->loader->run();
+	}
+
+	/**
+	 * The reference to the class that orchestrates the hooks with the plugin.
+	 *
+	 * @return    Bina_Woocommerce_Payment_Loader    Orchestrates the hooks of the plugin.
+	 * @since     1.0.0
+	 */
+	public function get_loader() : Bina_Woocommerce_Payment_Loader
+	{
+		return $this->loader;
 	}
 
 	/**
@@ -135,34 +179,8 @@ class Bina_Woocommerce_Payment
 	{
 		$plugin_admin = new Bina_Woocommerce_Payment_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-
 		$this->loader->add_action('plugins_loaded', $plugin_admin, 'plugins_loaded');
 		$this->loader->add_action('woocommerce_payment_gateways', $plugin_admin, 'payment_gateways');
-	}
-
-	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
-	 *
-	 * @return    string    The name of the plugin.
-	 * @since     1.0.0
-	 */
-	public function get_plugin_name(): string
-	{
-		return $this->plugin_name;
-	}
-
-	/**
-	 * Retrieve the version number of the plugin.
-	 *
-	 * @return    string    The version number of the plugin.
-	 * @since     1.0.0
-	 */
-	public function get_version(): string
-	{
-		return $this->version;
 	}
 
 	/**
@@ -175,31 +193,6 @@ class Bina_Woocommerce_Payment
 	private function define_public_hooks()
 	{
 		$plugin_public = new Bina_Woocommerce_Payment_Public($this->get_plugin_name(), $this->get_version());
-
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-
-	}
-
-	/**
-	 * Run the loader to execute all the hooks with WordPress.
-	 *
-	 * @since    1.0.0
-	 */
-	public function run()
-	{
-		$this->loader->run();
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
-	 *
-	 * @return    Bina_Woocommerce_Payment_Loader    Orchestrates the hooks of the plugin.
-	 * @since     1.0.0
-	 */
-	public function get_loader(): Bina_Woocommerce_Payment_Loader
-	{
-		return $this->loader;
 	}
 
 }

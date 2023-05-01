@@ -4,16 +4,16 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Sepehr extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Walleta extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_sepehr';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sepehr', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Sepehr', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_walleta';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Walleta', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Walleta', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 
@@ -22,8 +22,8 @@ class Bina_Woocommerce_Payment_Sepehr extends WC_Payment_Gateway
 		$settings = $this->settings();
 
 		$config = [
-			'terminalId' => array(
-				'title'       => __('Terminal ID', 'bina-woocommerce-payment'),
+			'merchantId' => array(
+				'title'       => __('Merchant ID', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,

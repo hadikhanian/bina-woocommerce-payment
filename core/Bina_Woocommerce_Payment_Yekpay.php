@@ -11,9 +11,9 @@ class Bina_Woocommerce_Payment_Yekpay extends WC_Payment_Gateway
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_walleta';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Walleta', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Walleta', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_yekpay';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Yekpay', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Yekpay', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 

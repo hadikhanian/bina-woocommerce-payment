@@ -1,4 +1,7 @@
 *.txt
 *.pot~
 *.po~
+.fleet
+.idea
+.vscode
 vendor

@@ -4,7 +4,7 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Digipay extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Paystar extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
@@ -22,27 +22,15 @@ class Bina_Woocommerce_Payment_Digipay extends WC_Payment_Gateway
 		$settings = $this->settings();
 
 		$config = [
-			'username'      => array(
-				'title'       => __('Username', 'bina-woocommerce-payment'),
+			'gatewayId' => array(
+				'title'       => __('Gateway ID', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
 			),
-			'password'      => array(
-				'title'       => __('Password', 'bina-woocommerce-payment'),
-				'type'        => 'text',
-				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
-				'desc_tip'    => true,
-			),
-			'client_id'     => array(
-				'title'       => __('Client ID', 'bina-woocommerce-payment'),
-				'type'        => 'text',
-				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
-				'desc_tip'    => true,
-			),
-			'client_secret' => array(
-				'title'       => __('Client Secret', 'bina-woocommerce-payment'),
-				'type'        => 'text',
+			'signKey'   => array(
+				'title'       => __('Sign Key', 'bina-woocommerce-payment'),
+				'type'        => 'textarea',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
 			),

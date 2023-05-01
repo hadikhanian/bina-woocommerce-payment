@@ -25,7 +25,7 @@
  * Domain Path:       /languages
  */
 
-// Add Autoload PSR-4
+// Add PSR-4 Autoload
 use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment;
 use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment_Activator;
 use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment_Deactivation;
