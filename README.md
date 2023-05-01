@@ -85,10 +85,12 @@ If you discover any security related issues, please email hadi.khanian@gmail.com
 
 ## Credits
 
-- [Hadi Khanian][link-author]
+- [Hadi Khanian][link-author1]
+- [Mahdi Khanzadi][link-author2]
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[link-author]: https://github.com/khanzadimahdi
+[link-author1]: https://github.com/hadikhanian
+[link-author2]: https://github.com/khanzadimahdi
