@@ -1,9 +1,10 @@
 # Bina WooCommerce Payment Gateway
 
-This is a PHP Package for Payment Gateway Integration. This package supports `PHP 7.2+`.
+This plugin will help you connect all Iranian, cryptocurrency, and international payment gateways to your WooCommerce store with just in one plugin. This plugin supports `PHP 7.2+`.
 
 
 Thanks a lot [shetabit/multipay](https://github.com/shetabit/multipay) package.
+We are very grateful to [shetabit/multipay](https://github.com/shetabit/multipay) package for being used in this extension. Please support it.
 
 > This plugin works with multiple drivers,
 (#list-of-available-drivers) (below list).
@@ -58,7 +59,7 @@ Thanks a lot [shetabit/multipay](https://github.com/shetabit/multipay) package.
 
 ## Install
 
-1- Download this Package & run the following command
+1- Download this plugin & run the following command
 
 2- Via Composer
 
@@ -67,12 +68,14 @@ $ composer install
 ```
 
 3- create a zip archive
+
 4- upload on your wordpress
 
 ## How to use
 
-Go to WooCommerce > Settings > Payments & active any payment gateway.
+Go to WooCommerce > Settings > Payments
 
+Active any payment gateway and configure payment settings
 
 ## Change log
 
@@ -89,3 +92,5 @@ If you discover any security related issues, please email hadi.khanian@gmail.com
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[link-author]: https://github.com/khanzadimahdi
