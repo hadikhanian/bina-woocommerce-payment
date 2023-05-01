@@ -2,8 +2,6 @@
 
 This plugin will help you connect all Iranian, cryptocurrency, and international payment gateways to your WooCommerce store with just in one plugin. This plugin supports `PHP 7.2+`.
 
-
-Thanks a lot [shetabit/multipay](https://github.com/shetabit/multipay) package.
 We are very grateful to [shetabit/multipay](https://github.com/shetabit/multipay) package for being used in this extension. Please support it.
 
 > This plugin works with multiple drivers,
