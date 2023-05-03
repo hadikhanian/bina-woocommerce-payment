@@ -1,6 +1,6 @@
 <?php
 
-namespace Bina\WoocommercePayment\Admin;
+namespace Bina\WoocommercePayment\Includes;
 
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Sep;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Azki;
@@ -97,7 +97,7 @@ class Bina_Woocommerce_Payment_Admin
 	 */
 	public function enqueue_styles()
 	{
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__).'css/bina-woocommerce-payment-admin.css', array(), $this->version, 'all');
+		//wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__).'css/bina-woocommerce-payment-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Bina_Woocommerce_Payment_Admin
 	 */
 	public function enqueue_scripts()
 	{
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__).'js/bina-woocommerce-payment-admin.js', array('jquery'), $this->version, false);
+		//wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__).'js/bina-woocommerce-payment-admin.js', array('jquery'), $this->version, false);
 	}
 
 	public function plugins_loaded()
