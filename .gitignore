@@ -1,5 +1,13 @@
 *.pot~
 *.po~
-.idea
-.vscode
+*.zip
+*.7z
+*.gz
+*.pdf
+*.xlsx
+/.fleet
+/.idea
+/.vscode
+/admin/export
 vendor
+binacity_license.txt

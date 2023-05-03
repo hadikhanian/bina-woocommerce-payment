@@ -13,6 +13,11 @@
       "Bina\\WoocommercePayment\\Public\\": "public/"
     }
   },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  },
   "authors": [
     {
       "name": "Hadi Khanian",
