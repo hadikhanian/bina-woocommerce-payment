@@ -136,13 +136,11 @@ trait Bina_Woocommerce_Payment_Core
 	public function verify()
 	{
 		// Get Request
-		$order_id      = absint($_REQUEST['wc_order']) ?? 0;
-		$transactionId = sanitize_text_field($_REQUEST['transactionId'] ?? $_REQUEST['code'] ?? $_REQUEST['transaction_id']);
-		$cancel        = $_REQUEST['cancel'] ?? false;
+		$order_id = absint($_REQUEST['wc_order']) ?? 0;
 
-		// Check Transaction ID
-		if ( empty($transactionId) ) {
-			wc_add_notice(__('Transaction ID is Empty.', 'bina-woocommerce-payment'), 'error');
+		// Check Cancel Transaction
+		if ( empty($order_id) ) {
+			wc_add_notice(__('Order ID is Empty! System can`t find your order data.', 'bina-woocommerce-payment'), 'error');
 			wp_redirect(wc_get_checkout_url());
 			exit;
 		}
@@ -156,31 +154,17 @@ trait Bina_Woocommerce_Payment_Core
 			exit;
 		}
 
-		// Check Cancel Transaction
-		if ( $cancel ) {
-			wc_add_notice(__('Payment Cancel By User', 'bina-woocommerce-payment'), 'error');
-			wp_redirect(wc_get_checkout_url());
-			exit;
-		}
-
 		// Verify Transaction
 		try {
 			$payment = new Payment($this->paymentConfig());
 			if ( get_woocommerce_currency() === 'IRR' ) {
-				$receipt = $payment->amount($order->get_total() / 10)->transactionId($transactionId)->verify();
+				$receipt = $payment->amount($order->get_total() / 10)->verify();
 			} else {
-				$receipt = $payment->amount($order->get_total())->transactionId($transactionId)->verify();
+				$receipt = $payment->amount($order->get_total())->verify();
 			}
-			$details = $receipt->getDetails();
-
-			// Update Order Meta
-			$trace_number = $details['traceNumber'] ?? $details['traceNo'] ?? '';
-			$card_number  = $details['cardNumber'] ?? $details['cardNo'] ?? '';
-			update_post_meta($order_id, '_bina_woocommerce_payment_trace_number', $trace_number);
-			update_post_meta($order_id, '_bina_woocommerce_payment_card_number', $card_number);
 
 			// Add Order Note
-			$note = sprintf(__('The transaction was successful.<br>The ref number is %s.<br>& card holderpan is %s.<br>& trace number is %s.', 'bina-woocommerce-payment'), $receipt->getReferenceId(), $card_number, $trace_number);
+			$note = sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId());
 			$order->add_order_note($note, 1);
 
 			// Process Order Transaction
@@ -221,7 +205,7 @@ trait Bina_Woocommerce_Payment_Core
 
 			return $invoice;
 		} catch ( Throwable $e ) {
-			return '';
+			return null;
 		}
 	}
 
