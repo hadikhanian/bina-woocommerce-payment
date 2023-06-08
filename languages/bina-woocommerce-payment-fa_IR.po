@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: bina-woocommerce-payment 1.0.0\n"
 "Report-Msgid-Bugs-To: https://plugin_website/\n"
 "POT-Creation-Date: 2023-04-30 21:47+0000\n"
-"PO-Revision-Date: 2023-05-05 11:01+0000\n"
+"PO-Revision-Date: 2023-06-08 07:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: فارسی\n"
 "Language: fa_IR\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: core/Bina_Woocommerce_Payment_Irankish.php:38
 msgid "Acceptor ID"
-msgstr "شنا"
+msgstr "شناسه تایید کننده"
 
 #: core/Bina_Woocommerce_Payment_Paypal.php:26
 msgid "Account ID"
@@ -132,7 +132,7 @@ msgstr "شناسه مشتری"
 msgid "Client Secret"
 msgstr "رمز امنیتی مشتری"
 
-#: core/Bina_Woocommerce_Payment_Core.php:226
+#: core/Bina_Woocommerce_Payment_Core.php:219
 msgid "Dear user, you are connecting to the payment gateway, Please wait..."
 msgstr ""
 "کاربر گرامی، شما در حال اتصال به درگاه پرداخت می باشید، لطفا منتظر بمانید..."
@@ -174,7 +174,7 @@ msgstr "فعال / غیر فعال شدن درگاه پرداخت از این ق
 msgid "Etebarino"
 msgstr "اعتباینو"
 
-#: core/Bina_Woocommerce_Payment_Core.php:243
+#: core/Bina_Woocommerce_Payment_Core.php:236
 msgid "Failed payment"
 msgstr "پرداخت ناموفق"
 
@@ -337,7 +337,7 @@ msgstr ""
 "شناسه سفارش بعد از بازگشت از درگاه یافت نشد و سیستم قادر به انجام این عملیات "
 "نمی باشد."
 
-#: core/Bina_Woocommerce_Payment_Core.php:240
+#: core/Bina_Woocommerce_Payment_Core.php:233
 msgid "Order Number"
 msgstr "شماره سفارش"
 
@@ -373,7 +373,7 @@ msgstr "پی دات آی آر"
 msgid "Pay Ping"
 msgstr "پی پینگ"
 
-#: core/Bina_Woocommerce_Payment_Core.php:241
+#: core/Bina_Woocommerce_Payment_Core.php:234
 msgid "Payable amount"
 msgstr "مبلغ قابل پرداخت"
 
@@ -471,7 +471,7 @@ msgstr "امضا (Sign Key)"
 msgid "Sizpay"
 msgstr "سیز پی"
 
-#: core/Bina_Woocommerce_Payment_Core.php:242
+#: core/Bina_Woocommerce_Payment_Core.php:235
 msgid "Successful payment"
 msgstr "پرداخت موفق"
 
@@ -496,25 +496,17 @@ msgstr "شناسه ترمینال"
 msgid "Test Method"
 msgstr "پایانه تست پرداخت"
 
-#: core/Bina_Woocommerce_Payment_Core.php:238
+#: core/Bina_Woocommerce_Payment_Core.php:231
 msgid "Test Payment Gateway"
 msgstr "درگاه پرداخت تست"
 
-#: core/Bina_Woocommerce_Payment_Core.php:182
+#: core/Bina_Woocommerce_Payment_Core.php:167
+#: core/Bina_Woocommerce_Payment_Core.php:175
 #, php-format
 msgid "The transaction was successful. The tracking number is %s"
 msgstr "تراکنش با موفقیت انجام شد. شماره پیگیری پرداخت برابر %s می باشد."
 
-#: core/Bina_Woocommerce_Payment_Core.php:174
-#, php-format
-msgid ""
-"The transaction was successful.<br>The ref number is %s.<br>& card holderpan "
-"is %s.<br>& trace number is %s."
-msgstr ""
-"با سپاس، تراکنش با موفقیت انجام شد.<br>شماره مرجع: %s<br>شماره کارت پرداخت "
-"کننده: %s<br>کد رهگیری: %s"
-
-#: core/Bina_Woocommerce_Payment_Core.php:239
+#: core/Bina_Woocommerce_Payment_Core.php:232
 msgid ""
 "This gateway is only for testing the validity of the payment process and "
 "canceling payments."

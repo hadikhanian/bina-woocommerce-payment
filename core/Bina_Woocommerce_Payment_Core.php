@@ -125,6 +125,7 @@ trait Bina_Woocommerce_Payment_Core
 				update_post_meta($order_id, '_bina_woocommerce_payment_transaction_id', $transactionId);
 				update_post_meta($order_id, '_bina_woocommerce_payment_driver', $this->id);
 			});
+			$payment->resetCallbackUrl();
 			echo $this->render($payment->pay());
 		} catch ( Throwable $e ) {
 			wc_add_notice(__('Payment Error', 'bina-woocommerce-payment').' - '.$e->getMessage(), 'error');

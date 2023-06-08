@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bina-woocommerce-payment 1.0.0\n"
 "Report-Msgid-Bugs-To: https://plugin_website/\n"
-"POT-Creation-Date: 2023-05-05 11:00+0000\n"
+"POT-Creation-Date: 2023-05-07 10:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:226
+#: core/Bina_Woocommerce_Payment_Core.php:219
 msgid "Dear user, you are connecting to the payment gateway, Please wait..."
 msgstr ""
 
@@ -171,7 +171,7 @@ msgstr ""
 msgid "Etebarino"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:243
+#: core/Bina_Woocommerce_Payment_Core.php:236
 msgid "Failed payment"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Order ID is Empty! System can`t find your order data."
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:240
+#: core/Bina_Woocommerce_Payment_Core.php:233
 msgid "Order Number"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Pay Ping"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:241
+#: core/Bina_Woocommerce_Payment_Core.php:234
 msgid "Payable amount"
 msgstr ""
 
@@ -464,7 +464,7 @@ msgstr ""
 msgid "Sizpay"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:242
+#: core/Bina_Woocommerce_Payment_Core.php:235
 msgid "Successful payment"
 msgstr ""
 
@@ -489,23 +489,17 @@ msgstr ""
 msgid "Test Method"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:238
+#: core/Bina_Woocommerce_Payment_Core.php:231
 msgid "Test Payment Gateway"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:182
+#: core/Bina_Woocommerce_Payment_Core.php:167
+#: core/Bina_Woocommerce_Payment_Core.php:175
 #, php-format
 msgid "The transaction was successful. The tracking number is %s"
 msgstr ""
 
-#: core/Bina_Woocommerce_Payment_Core.php:174
-#, php-format
-msgid ""
-"The transaction was successful.<br>The ref number is %s.<br>& card holderpan "
-"is %s.<br>& trace number is %s."
-msgstr ""
-
-#: core/Bina_Woocommerce_Payment_Core.php:239
+#: core/Bina_Woocommerce_Payment_Core.php:232
 msgid ""
 "This gateway is only for testing the validity of the payment process and "
 "canceling payments."
