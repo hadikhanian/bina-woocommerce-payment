@@ -48,7 +48,7 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 	public function process_admin_options()
 	{
 		parent::process_admin_options();
-
+		$pasargad_settings = get_option('woocommerce_bina_woocommerce_payment_pasargad_settings');
 		$pasargad_settings['certificate'] = $_POST['woocommerce_bina_woocommerce_payment_pasargad_certificate'] ?? null;
 		update_option('woocommerce_bina_woocommerce_payment_pasargad_settings', $pasargad_settings);
 	}
