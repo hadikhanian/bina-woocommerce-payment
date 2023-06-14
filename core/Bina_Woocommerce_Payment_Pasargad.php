@@ -12,12 +12,12 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 	{
 		// Create the payment gateway
 		$this->id                 = 'bina_woocommerce_payment_pasargad';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Pasargad', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Pasargad', 'bina-woocommerce-payment');
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment') . ' – ' . __('Pasargad', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment') . ' – ' . __('Pasargad', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 
-	public function form_fields() : array
+	public function form_fields(): array
 	{
 		$settings = $this->settings();
 
@@ -43,5 +43,13 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 		];
 
 		return array_merge($settings, $config);
+	}
+
+	public function process_admin_options()
+	{
+		parent::process_admin_options();
+
+		$pasargad_settings['certificate'] = $_POST['woocommerce_bina_woocommerce_payment_pasargad_certificate'] ?? null;
+		update_option('woocommerce_bina_woocommerce_payment_pasargad_settings', $pasargad_settings);
 	}
 }
