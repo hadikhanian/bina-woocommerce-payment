@@ -16,7 +16,7 @@
  * Plugin Name:       Bina WooCommerce Payment
  * Plugin URI:        https://www.binacity.com
  * Description:       This plugin will help you connect all Iranian, cryptocurrency, and international payment gateways to your WooCommerce store with just one plugin.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            Hadi Khanian
  * Author URI:        https://www.binacity.com
  * License:           GPL-2.0+
@@ -30,10 +30,10 @@ use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment;
 use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment_Activator;
 use Bina\WoocommercePayment\Includes\Bina_Woocommerce_Payment_Deactivation;
 
-require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+require_once plugin_dir_path(__FILE__).'vendor/autoload.php';
 
 // If this file is called directly, abort.
-if (!defined('WPINC')) {
+if ( ! defined('WPINC') ) {
 	die;
 }
 
@@ -42,7 +42,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-const BINA_WOOCOMMERCE_PAYMENT_VERSION = '1.0.5';
+const BINA_WOOCOMMERCE_PAYMENT_VERSION = '1.0.6';
 
 /**
  * The code that runs during plugin activation.

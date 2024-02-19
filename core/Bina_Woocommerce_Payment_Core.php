@@ -2,43 +2,43 @@
 
 namespace Bina\WoocommercePayment\Core;
 
-use WC_Order;
-use Throwable;
+use Shetabit\Multipay\Drivers\Aqayepardakht\Aqayepardakht;
+use Shetabit\Multipay\Drivers\Asanpardakht\Asanpardakht;
+use Shetabit\Multipay\Drivers\Atipay\Atipay;
+use Shetabit\Multipay\Drivers\Azki\Azki;
+use Shetabit\Multipay\Drivers\Behpardakht\Behpardakht;
+use Shetabit\Multipay\Drivers\Digipay\Digipay;
+use Shetabit\Multipay\Drivers\Etebarino\Etebarino;
+use Shetabit\Multipay\Drivers\Fanavacard\Fanavacard;
+use Shetabit\Multipay\Drivers\Idpay\Idpay;
+use Shetabit\Multipay\Drivers\Irankish\Irankish;
+use Shetabit\Multipay\Drivers\Local\Local;
+use Shetabit\Multipay\Drivers\Nextpay\Nextpay;
+use Shetabit\Multipay\Drivers\Parsian\Parsian;
+use Shetabit\Multipay\Drivers\Pasargad\Pasargad;
+use Shetabit\Multipay\Drivers\Payfa\Payfa;
+use Shetabit\Multipay\Drivers\Payir\Payir;
+use Shetabit\Multipay\Drivers\Paypal\Paypal;
+use Shetabit\Multipay\Drivers\Payping\Payping;
+use Shetabit\Multipay\Drivers\Paystar\Paystar;
+use Shetabit\Multipay\Drivers\Poolam\Poolam;
+use Shetabit\Multipay\Drivers\Rayanpay\Rayanpay;
+use Shetabit\Multipay\Drivers\SEP\SEP;
+use Shetabit\Multipay\Drivers\Sadad\Sadad;
+use Shetabit\Multipay\Drivers\Saman\Saman;
+use Shetabit\Multipay\Drivers\Sepehr\Sepehr;
+use Shetabit\Multipay\Drivers\Sepordeh\Sepordeh;
+use Shetabit\Multipay\Drivers\Sizpay\Sizpay;
+use Shetabit\Multipay\Drivers\Vandar\Vandar;
+use Shetabit\Multipay\Drivers\Walleta\Walleta;
+use Shetabit\Multipay\Drivers\Yekpay\Yekpay;
+use Shetabit\Multipay\Drivers\Zarinpal\Zarinpal;
+use Shetabit\Multipay\Drivers\Zibal\Zibal;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Multipay\Payment;
 use Shetabit\Multipay\RedirectionForm;
-use Shetabit\Multipay\Drivers\SEP\SEP;
-use Shetabit\Multipay\Drivers\Azki\Azki;
-use Shetabit\Multipay\Drivers\Payfa\Payfa;
-use Shetabit\Multipay\Drivers\Zibal\Zibal;
-use Shetabit\Multipay\Drivers\Saman\Saman;
-use Shetabit\Multipay\Drivers\Sadad\Sadad;
-use Shetabit\Multipay\Drivers\Payir\Payir;
-use Shetabit\Multipay\Drivers\Idpay\Idpay;
-use Shetabit\Multipay\Drivers\Local\Local;
-use Shetabit\Multipay\Drivers\Vandar\Vandar;
-use Shetabit\Multipay\Drivers\Sizpay\Sizpay;
-use Shetabit\Multipay\Drivers\Yekpay\Yekpay;
-use Shetabit\Multipay\Drivers\Sepehr\Sepehr;
-use Shetabit\Multipay\Drivers\Poolam\Poolam;
-use Shetabit\Multipay\Drivers\Paypal\Paypal;
-use Shetabit\Multipay\Drivers\Atipay\Atipay;
-use Shetabit\Multipay\Drivers\Walleta\Walleta;
-use Shetabit\Multipay\Drivers\Paystar\Paystar;
-use Shetabit\Multipay\Drivers\Payping\Payping;
-use Shetabit\Multipay\Drivers\Parsian\Parsian;
-use Shetabit\Multipay\Drivers\Nextpay\Nextpay;
-use Shetabit\Multipay\Drivers\Digipay\Digipay;
-use Shetabit\Multipay\Drivers\Rayanpay\Rayanpay;
-use Shetabit\Multipay\Drivers\Sepordeh\Sepordeh;
-use Shetabit\Multipay\Drivers\Zarinpal\Zarinpal;
-use Shetabit\Multipay\Drivers\Pasargad\Pasargad;
-use Shetabit\Multipay\Drivers\Irankish\Irankish;
-use Shetabit\Multipay\Drivers\Etebarino\Etebarino;
-use Shetabit\Multipay\Drivers\Fanavacard\Fanavacard;
-use Shetabit\Multipay\Drivers\Behpardakht\Behpardakht;
-use Shetabit\Multipay\Drivers\Asanpardakht\Asanpardakht;
-use Shetabit\Multipay\Drivers\Aqayepardakht\Aqayepardakht;
+use Throwable;
+use WC_Order;
 
 trait Bina_Woocommerce_Payment_Core
 {
@@ -158,11 +158,7 @@ trait Bina_Woocommerce_Payment_Core
 		// Verify Transaction
 		try {
 			$payment = new Payment($this->paymentConfig());
-			if ( get_woocommerce_currency() === 'IRR' ) {
-				$receipt = $payment->amount($order->get_total() / 10)->verify();
-			} else {
-				$receipt = $payment->amount($order->get_total())->verify();
-			}
+			$payment->amount($this->getTotal($order));
 
 			// Add Order Note
 			$note = sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId());
@@ -183,18 +179,23 @@ trait Bina_Woocommerce_Payment_Core
 		}
 	}
 
+	public function getTotal(WC_Order $order)
+	{
+		if ( get_woocommerce_currency() === 'IRR' ) {
+			return $order->get_total() / 10;
+		} else {
+			return $order->get_total();
+		}
+	}
+
 	public function make_invoice(WC_Order $order) : ?Invoice
 	{
 		try {
 			// Create New Invoice Object
 			$invoice = new Invoice;
 
-			// Set Invoice Amount.
-			if ( get_woocommerce_currency() === 'IRR' ) {
-				$invoice->amount($order->get_total() / 10);
-			} else {
-				$invoice->amount($order->get_total());
-			}
+			// Set Invoice Amount
+			$invoice->amount($this->getTotal($order));
 
 			// Set Invoice Details
 			$invoice->detail([
