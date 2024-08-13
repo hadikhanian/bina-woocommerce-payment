@@ -3,7 +3,7 @@
   "description": "This plugin will help you connect all Iranian, cryptocurrency, and international payment gateways to your WooCommerce store with just one plugin.",
   "type": "project",
   "require": {
-    "shetabit/multipay": "^1.28"
+    "shetabit/multipay": "^1.50"
   },
   "autoload": {
     "psr-4": {
@@ -11,6 +11,11 @@
       "Bina\\WoocommercePayment\\Admin\\": "admin/",
       "Bina\\WoocommercePayment\\Includes\\": "includes/",
       "Bina\\WoocommercePayment\\Public\\": "public/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
     }
   },
   "authors": [

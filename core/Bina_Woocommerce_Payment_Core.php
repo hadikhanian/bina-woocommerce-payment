@@ -6,34 +6,39 @@ use WC_Order;
 use Throwable;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Multipay\Payment;
-use Shetabit\Multipay\RedirectionForm;
 use Shetabit\Multipay\Drivers\SEP\SEP;
+use Shetabit\Multipay\RedirectionForm;
 use Shetabit\Multipay\Drivers\Azki\Azki;
-use Shetabit\Multipay\Drivers\Payfa\Payfa;
-use Shetabit\Multipay\Drivers\Zibal\Zibal;
-use Shetabit\Multipay\Drivers\Saman\Saman;
-use Shetabit\Multipay\Drivers\Sadad\Sadad;
-use Shetabit\Multipay\Drivers\Payir\Payir;
 use Shetabit\Multipay\Drivers\Idpay\Idpay;
 use Shetabit\Multipay\Drivers\Local\Local;
-use Shetabit\Multipay\Drivers\Vandar\Vandar;
-use Shetabit\Multipay\Drivers\Sizpay\Sizpay;
-use Shetabit\Multipay\Drivers\Yekpay\Yekpay;
-use Shetabit\Multipay\Drivers\Sepehr\Sepehr;
-use Shetabit\Multipay\Drivers\Poolam\Poolam;
-use Shetabit\Multipay\Drivers\Paypal\Paypal;
+use Shetabit\Multipay\Drivers\Payfa\Payfa;
+use Shetabit\Multipay\Drivers\Payir\Payir;
+use Shetabit\Multipay\Drivers\Sadad\Sadad;
+use Shetabit\Multipay\Drivers\Saman\Saman;
+use Shetabit\Multipay\Drivers\Zibal\Zibal;
+use Shetabit\Multipay\Drivers\Jibit\Jibit;
+use Shetabit\Multipay\Drivers\Toman\Toman;
 use Shetabit\Multipay\Drivers\Atipay\Atipay;
-use Shetabit\Multipay\Drivers\Walleta\Walleta;
-use Shetabit\Multipay\Drivers\Paystar\Paystar;
-use Shetabit\Multipay\Drivers\Payping\Payping;
-use Shetabit\Multipay\Drivers\Parsian\Parsian;
-use Shetabit\Multipay\Drivers\Nextpay\Nextpay;
+use Shetabit\Multipay\Drivers\Paypal\Paypal;
+use Shetabit\Multipay\Drivers\Poolam\Poolam;
+use Shetabit\Multipay\Drivers\Sepehr\Sepehr;
+use Shetabit\Multipay\Drivers\Sizpay\Sizpay;
+use Shetabit\Multipay\Drivers\Vandar\Vandar;
+use Shetabit\Multipay\Drivers\Yekpay\Yekpay;
+use Shetabit\Multipay\Drivers\Bitpay\Bitpay;
 use Shetabit\Multipay\Drivers\Digipay\Digipay;
+use Shetabit\Multipay\Drivers\Nextpay\Nextpay;
+use Shetabit\Multipay\Drivers\Parsian\Parsian;
+use Shetabit\Multipay\Drivers\Payping\Payping;
+use Shetabit\Multipay\Drivers\Paystar\Paystar;
+use Shetabit\Multipay\Drivers\Walleta\Walleta;
+use Shetabit\Multipay\Drivers\Irankish\Irankish;
+use Shetabit\Multipay\Drivers\Pasargad\Pasargad;
 use Shetabit\Multipay\Drivers\Rayanpay\Rayanpay;
 use Shetabit\Multipay\Drivers\Sepordeh\Sepordeh;
 use Shetabit\Multipay\Drivers\Zarinpal\Zarinpal;
-use Shetabit\Multipay\Drivers\Pasargad\Pasargad;
-use Shetabit\Multipay\Drivers\Irankish\Irankish;
+use Shetabit\Multipay\Drivers\Gooyapay\Gooyapay;
+use Shetabit\Multipay\Drivers\SnappPay\SnappPay;
 use Shetabit\Multipay\Drivers\Etebarino\Etebarino;
 use Shetabit\Multipay\Drivers\Fanavacard\Fanavacard;
 use Shetabit\Multipay\Drivers\Behpardakht\Behpardakht;
@@ -125,74 +130,10 @@ trait Bina_Woocommerce_Payment_Core
 				update_post_meta($order_id, '_bina_woocommerce_payment_transaction_id', $transactionId);
 				update_post_meta($order_id, '_bina_woocommerce_payment_driver', $this->id);
 			});
+			$payment->resetCallbackUrl();
 			echo $this->render($payment->pay());
 		} catch ( Throwable $e ) {
 			wc_add_notice(__('Payment Error', 'bina-woocommerce-payment').' - '.$e->getMessage(), 'error');
-			wp_redirect(wc_get_checkout_url());
-			exit;
-		}
-	}
-
-	public function verify()
-	{
-		// Get Request
-		$order_id      = absint($_REQUEST['wc_order']) ?? 0;
-		$transactionId = sanitize_text_field($_REQUEST['transactionId'] ?? $_REQUEST['code'] ?? $_REQUEST['transaction_id']);
-		$cancel        = $_REQUEST['cancel'] ?? false;
-
-		// Check Transaction ID
-		if ( empty($transactionId) ) {
-			wc_add_notice(__('Transaction ID is Empty.', 'bina-woocommerce-payment'), 'error');
-			wp_redirect(wc_get_checkout_url());
-			exit;
-		}
-
-		// Get Order
-		$order = new WC_Order($order_id);
-
-		// Check Order is Unpaid
-		if ( $order->is_paid() ) {
-			wp_redirect(wc_get_checkout_url());
-			exit;
-		}
-
-		// Check Cancel Transaction
-		if ( $cancel ) {
-			wc_add_notice(__('Payment Cancel By User', 'bina-woocommerce-payment'), 'error');
-			wp_redirect(wc_get_checkout_url());
-			exit;
-		}
-
-		// Verify Transaction
-		try {
-			$payment = new Payment($this->paymentConfig());
-			if ( get_woocommerce_currency() === 'IRR' ) {
-				$receipt = $payment->amount($order->get_total() / 10)->transactionId($transactionId)->verify();
-			} else {
-				$receipt = $payment->amount($order->get_total())->transactionId($transactionId)->verify();
-			}
-			$details = $receipt->getDetails();
-
-			// Update Order Meta
-			$trace_number = $details['traceNumber'] ?? $details['traceNo'] ?? '';
-			$card_number  = $details['cardNumber'] ?? $details['cardNo'] ?? '';
-			update_post_meta($order_id, '_bina_woocommerce_payment_trace_number', $trace_number);
-			update_post_meta($order_id, '_bina_woocommerce_payment_card_number', $card_number);
-
-			// Add Order Note
-			$note = sprintf(__('The transaction was successful.<br>The ref number is %s.<br>& card holderpan is %s.<br>& trace number is %s.', 'bina-woocommerce-payment'), $receipt->getReferenceId(), $card_number, $trace_number);
-			$order->add_order_note($note, 1);
-
-			// Process Order Transaction
-			$order->payment_complete($receipt->getReferenceId());
-			$order->save();
-
-			// Redirect to Thank You Message
-			wc_add_notice(sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId()));
-			wp_redirect(add_query_arg('wc_status', 'success', $this->get_return_url($order)));
-			exit;
-		} catch ( Throwable $e ) {
-			wc_add_notice($e->getMessage(), 'error');
 			wp_redirect(wc_get_checkout_url());
 			exit;
 		}
@@ -204,12 +145,8 @@ trait Bina_Woocommerce_Payment_Core
 			// Create New Invoice Object
 			$invoice = new Invoice;
 
-			// Set Invoice Amount.
-			if ( get_woocommerce_currency() === 'IRR' ) {
-				$invoice->amount($order->get_total() / 10);
-			} else {
-				$invoice->amount($order->get_total());
-			}
+			// Set Invoice Amount
+			$invoice->amount($this->getTotal($order));
 
 			// Set Invoice Details
 			$invoice->detail([
@@ -221,20 +158,17 @@ trait Bina_Woocommerce_Payment_Core
 
 			return $invoice;
 		} catch ( Throwable $e ) {
-			return '';
+			return null;
 		}
 	}
 
-	public function render(RedirectionForm $redirectData) : string
+	public function getTotal(WC_Order $order)
 	{
-		$html = "<form id='bina_woocommerce_payment' action='{$redirectData->getAction()}' method='{$redirectData->getMethod()}'>";
-		foreach ( $redirectData->getInputs() as $name => $value ) {
-			$html .= "<input type='hidden' name='{$name}' value='$value'>";
+		if ( get_woocommerce_currency() === 'IRR' ) {
+			return $order->get_total() / 10;
+		} else {
+			return $order->get_total();
 		}
-		$html .= "</form><script> setTimeout(function() { jQuery('#bina_woocommerce_payment').submit(); }, 300); </script>";
-		$html .= "<p style='text-align: center; font-weight:bold; margin:50px auto;'>".__('Dear user, you are connecting to the payment gateway, Please wait...', 'bina-woocommerce-payment')."</p>";
-
-		return $html;
 	}
 
 	public function paymentConfig() : array
@@ -260,15 +194,16 @@ trait Bina_Woocommerce_Payment_Core
 					'username'            => $this->get_option('username'),
 					'password'            => $this->get_option('password'),
 					'callbackUrl'         => '',
+					'currency'            => $this->getCurrency(),
 				],
 				'atipay'        => [
 					'atipayTokenUrl'           => 'https://mipg.atipay.net/v1/get-token',
 					'atipayRedirectGatewayUrl' => 'https://mipg.atipay.net/v1/redirect-to-gateway',
 					'atipayVerifyUrl'          => 'https://mipg.atipay.net/v1/verify-payment',
 					'apikey'                   => $this->get_option('apikey'),
-					'currency'                 => (get_woocommerce_currency() === 'IRT') ? 'T' : 'R',
 					'callbackUrl'              => '',
 					'description'              => $this->description,
+					'currency'                 => $this->getCurrency(),
 				],
 				'asanpardakht'  => [
 					'apiPaymentUrl'     => 'https://asan.shaparak.ir',
@@ -276,9 +211,9 @@ trait Bina_Woocommerce_Payment_Core
 					'username'          => $this->get_option('username'),
 					'password'          => $this->get_option('password'),
 					'merchantConfigID'  => $this->get_option('merchantConfigID'),
-					'currency'          => (get_woocommerce_currency() === 'IRT') ? 'T' : 'R',
 					'callbackUrl'       => '',
 					'description'       => $this->description,
+					'currency'          => $this->getCurrency(),
 				],
 				'behpardakht'   => [
 					'apiPurchaseUrl'     => 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl',
@@ -289,6 +224,7 @@ trait Bina_Woocommerce_Payment_Core
 					'password'           => $this->get_option('password'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'digipay'       => [
 					'apiOauthUrl'        => 'https://api.mydigipay.com/digipay/api/oauth/token',
@@ -300,6 +236,7 @@ trait Bina_Woocommerce_Payment_Core
 					'client_id'          => $this->get_option('client_id'),
 					'client_secret'      => $this->get_option('client_secret'),
 					'callbackUrl'        => '',
+					'currency'           => $this->getCurrency(),
 				],
 				'etebarino'     => [
 					'apiPurchaseUrl'     => 'https://api.etebarino.com/public/merchant/request-payment',
@@ -311,6 +248,7 @@ trait Bina_Woocommerce_Payment_Core
 					'password'           => $this->get_option('password'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'idpay'         => [
 					'apiPurchaseUrl'       => 'https://api.idpay.ir/v1.1/payment',
@@ -321,6 +259,7 @@ trait Bina_Woocommerce_Payment_Core
 					'callbackUrl'          => '',
 					'description'          => $this->description,
 					'sandbox'              => $this->get_option('sandbox'),
+					'currency'             => $this->getCurrency(),
 				],
 				'irankish'      => [
 					'apiPurchaseUrl'     => 'https://ikc.shaparak.ir/api/v3/tokenization/make',
@@ -332,6 +271,7 @@ trait Bina_Woocommerce_Payment_Core
 					'password'           => $this->get_option('password'),
 					'acceptorId'         => $this->get_option('acceptorId'),
 					'pubKey'             => $this->get_option('pubKey'),
+					'currency'           => $this->getCurrency(),
 				],
 				'nextpay'       => [
 					'apiPurchaseUrl'     => 'https://nextpay.org/nx/gateway/token',
@@ -340,6 +280,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'parsian'       => [
 					'apiPurchaseUrl'     => 'https://pec.shaparak.ir/NewIPGServices/Sale/SaleService.asmx?wsdl',
@@ -348,17 +289,21 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'pasargad'      => [
 					'apiPaymentUrl'          => 'https://pep.shaparak.ir/payment.aspx',
 					'apiGetToken'            => 'https://pep.shaparak.ir/Api/v1/Payment/GetToken',
 					'apiCheckTransactionUrl' => 'https://pep.shaparak.ir/Api/v1/Payment/CheckTransactionResult',
 					'apiVerificationUrl'     => 'https://pep.shaparak.ir/Api/v1/Payment/VerifyPayment',
-					'merchantId'             => $this->get_option('terminalId'),
+					'merchantId'             => $this->get_option('merchantId'),
 					'terminalCode'           => $this->get_option('terminalCode'),
+					'username'               => $this->get_option('username'),
+					'password'               => $this->get_option('password'),
 					'certificate'            => $this->get_option('certificate'), // can be string (and set certificateType to xml_string) or a xml file path (and set certificateType to xml_file)
 					'certificateType'        => 'xml_string', // can be: xml_file, xml_string
 					'callbackUrl'            => '',
+					'currency'               => $this->getCurrency(),
 				],
 				'payir'         => [
 					'apiPurchaseUrl'     => 'https://pay.ir/pg/send',
@@ -367,6 +312,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'), // set it to `test` for test environments
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'paypal'        => [
 					'apiPurchaseUrl'     => 'https://www.paypal.com/cgi-bin/webscr', //normal api
@@ -378,10 +324,10 @@ trait Bina_Woocommerce_Payment_Core
 					'sandboxApiVerificationUrl' => 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl',
 
 					'mode'        => $this->get_option('mode') ?? 'normal', // can be normal, sandbox
-					'currency'    => get_woocommerce_currency(),
 					'id'          => $this->get_option('accountId'), // Specify the email of the PayPal Business account
 					'callbackUrl' => '',
 					'description' => $this->description,
+					'currency'    => $this->getCurrency(),
 				],
 				'payping'       => [
 					'apiPurchaseUrl'     => 'https://api.payping.ir/v2/pay/',
@@ -390,6 +336,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'paystar'       => [
 					'apiPurchaseUrl'     => 'https://core.paystar.ir/api/pardakht/create/',
@@ -399,6 +346,7 @@ trait Bina_Woocommerce_Payment_Core
 					'signKey'            => $this->get_option('signKey'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'poolam'        => [
 					'apiPurchaseUrl'     => 'https://poolam.ir/invoice/request/',
@@ -407,6 +355,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'sadad'         => [
 					'apiPaymentByIdentityUrl'  => 'https://sadad.shaparak.ir/api/v0/PaymentByIdentity/PaymentRequest',
@@ -421,6 +370,7 @@ trait Bina_Woocommerce_Payment_Core
 					'mode'                     => 'normal', // can be normal and PaymentByIdentity,
 					'PaymentIdentity'          => '',
 					'description'              => $this->description,
+					'currency'                 => $this->getCurrency(),
 				],
 				'saman'         => [
 					'apiPurchaseUrl'     => 'https://sep.shaparak.ir/Payments/InitPayment.asmx?WSDL',
@@ -429,6 +379,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'sep'           => [
 					'apiGetToken'        => 'https://sep.shaparak.ir/onlinepg/onlinepg',
@@ -437,6 +388,7 @@ trait Bina_Woocommerce_Payment_Core
 					'terminalId'         => $this->get_option('terminalId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'sepehr'        => [
 					'apiGetToken'        => 'https://mabna.shaparak.ir:8081/V1/PeymentApi/GetToken',
@@ -445,6 +397,7 @@ trait Bina_Woocommerce_Payment_Core
 					'terminalId'         => $this->get_option('terminalId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'walleta'       => [
 					'apiPurchaseUrl'     => 'https://cpg.walleta.ir/payment/request.json',
@@ -453,6 +406,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'yekpay'        => [
 					'apiPurchaseUrl'     => 'https://gate.yekpay.com/api/payment/server?wsdl',
@@ -463,6 +417,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'zarinpal'      => [
 					'apiPurchaseUrl'     => 'https://api.zarinpal.com/pg/v4/payment/request.json', // normal api
@@ -481,6 +436,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'  => $this->get_option('merchantId'),
 					'callbackUrl' => '',
 					'description' => $this->description,
+					'currency'    => $this->getCurrency(),
 				],
 				'zibal'         => [
 					'apiPurchaseUrl'     => 'https://gateway.zibal.ir/v1/request', // normal api
@@ -490,6 +446,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'         => $this->get_option('merchantId'),
 					'callbackUrl'        => '',
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'sepordeh'      => [
 					'apiPurchaseUrl'      => 'https://sepordeh.com/merchant/invoices/add',
@@ -500,6 +457,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'          => $this->get_option('merchantId'),
 					'callbackUrl'         => '',
 					'description'         => $this->description,
+					'currency'            => $this->getCurrency(),
 				],
 				'rayanpay'      => [
 					'apiPurchaseUrl' => 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat',
@@ -507,9 +465,10 @@ trait Bina_Woocommerce_Payment_Core
 					'apiPayStart'    => 'https://pms.rayanpay.com/api/v1/ipg/payment/start',
 					'apiPayVerify'   => 'https://pms.rayanpay.com/api/v1/ipg/payment/response/parse',
 					'username'       => $this->get_option('username'),
-					'client_id'      => $this->get_option('client_id'),
 					'password'       => $this->get_option('password'),
+					'client_id'      => $this->get_option('clientId'),
 					'callbackUrl'    => '',
+					'currency'       => $this->getCurrency(),
 				],
 				'sizpay'        => [
 					'apiPurchaseUrl'     => 'https://rt.sizpay.ir/KimiaIPGRouteService.asmx?WSDL',
@@ -521,6 +480,7 @@ trait Bina_Woocommerce_Payment_Core
 					'password'           => $this->get_option('password'),
 					'SignData'           => $this->get_option('SignData'),
 					'callbackUrl'        => '',
+					'currency'           => $this->getCurrency(),
 				],
 				'vandar'        => [
 					'apiPurchaseUrl'     => 'https://ipg.vandar.io/api/v3/send',
@@ -529,6 +489,7 @@ trait Bina_Woocommerce_Payment_Core
 					'callbackUrl'        => '',
 					'merchantId'         => $this->get_option('merchantId'),
 					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
 				],
 				'aqayepardakht' => [
 					'apiPurchaseUrl'       => 'https://panel.aqayepardakht.ir/api/v2/create',
@@ -542,6 +503,7 @@ trait Bina_Woocommerce_Payment_Core
 					'mobile'               => '',
 					'email'                => '',
 					'description'          => $this->description,
+					'currency'             => $this->getCurrency(),
 				],
 				'azki'          => [
 					'apiPaymentUrl' => 'https://api.azkivam.com',
@@ -550,6 +512,7 @@ trait Bina_Woocommerce_Payment_Core
 					'merchantId'    => $this->get_option('merchantId'),
 					'key'           => $this->get_option('key'),
 					'description'   => $this->description,
+					'currency'      => $this->getCurrency(),
 				],
 				'payfa'         => [
 					'apiPurchaseUrl'     => 'https://payment.payfa.com/v2/api/Transaction/Request',
@@ -557,6 +520,61 @@ trait Bina_Woocommerce_Payment_Core
 					'apiVerificationUrl' => 'https://payment.payfa.com/v2/api/Transaction/Verify/',
 					'callbackUrl'        => '',
 					'apiKey'             => $this->get_option('apiKey'),
+					'currency'           => $this->getCurrency(),
+				],
+				'gooyapay'      => [
+					'apiPurchaseUrl'     => 'https://gooyapay.ir/webservice/rest/PaymentRequest',
+					'apiVerificationUrl' => 'https://gooyapay.ir/webservice/rest/PaymentVerification',
+					'apiPaymentUrl'      => 'https://gooyapay.ir/startPay/',
+					'merchantId'         => $this->get_option('merchantId'),
+					'callbackUrl'        => '',
+					'currency'           => $this->getCurrency(),
+				],
+				'jibit'         => [
+					'apiPaymentUrl'    => 'https://napi.jibit.ir/ppg/v3',
+					'apiKey'           => $this->get_option('apiKey'),
+					'apiSecret'        => $this->get_option('apiSecret'),
+					// You can change the token storage path in Laravel like this
+					// 'tokenStoragePath' => function_exists('storage_path') ? storage_path('jibit/') : 'jibit/'
+					'tokenStoragePath' => 'jibit/',
+					'callbackUrl'      => '',
+					'description'      => $this->description,
+					'currency'         => $this->getCurrency(),
+				],
+				'toman'         => [
+					'base_url'  => 'https://escrow-api.toman.ir/api/v1',
+					'shop_slug' => $this->get_option('shopSlug'),
+					'auth_code' => $this->get_option('authCode'),
+					'data'      => $this->get_option('data'),
+					'currency'  => $this->getCurrency(),
+				],
+				'bitpay'        => [
+					'apiPurchaseUrl'     => 'https://bitpay.ir/payment/gateway-send',
+					'apiPaymentUrl'      => 'https://bitpay.ir/payment/gateway-{id_get}-get',
+					'apiVerificationUrl' => 'https://bitpay.ir/payment/gateway-result-second',
+					'callbackUrl'        => '',
+					'api_token'          => $this->get_option('apiToken'),
+					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
+				],
+				'minipay'       => [
+					'apiPurchaseUrl'     => 'https://v1.minipay.me/api/pg/request/',
+					'apiPaymentUrl'      => 'https://ipg.minipay.me/',
+					'apiVerificationUrl' => 'https://v1.minipay.me/api/pg/verify/',
+					'merchantId'         => $this->get_option('merchantId'),
+					'callbackUrl'        => '',
+					'description'        => $this->description,
+					'currency'           => $this->getCurrency(),
+				],
+				'snapppay'      => [
+					'apiPaymentUrl' => 'https://fms-gateway-staging.apps.public.teh-1.snappcloud.io',
+					'callbackUrl'   => '',
+					'username'      => $this->get_option('username'),
+					'password'      => $this->get_option('password'),
+					'client_id'     => $this->get_option('clientId'),
+					'client_secret' => $this->get_option('clientSecret'),
+					'description'   => $this->description,
+					'currency'      => $this->getCurrency(),
 				],
 			],
 			'map'     => [
@@ -592,7 +610,79 @@ trait Bina_Woocommerce_Payment_Core
 				'aqayepardakht' => Aqayepardakht::class,
 				'azki'          => Azki::class,
 				'payfa'         => Payfa::class,
+				'gooyapay'      => Gooyapay::class,
+				'jibit'         => Jibit::class,
+				'toman'         => Toman::class,
+				'bitpay'        => Bitpay::class,
+				'snapppay'      => SnappPay::class,
+
 			],
 		];
+	}
+
+	private function getCurrency() : string
+	{
+		if ( function_exists('get_woocommerce_currency') ) {
+			return (get_woocommerce_currency() === 'IRT') ? 'T' : 'R';
+		}
+
+		return 'T';
+	}
+
+	public function render(RedirectionForm $redirectData) : string
+	{
+		$html = "<form id='bina_woocommerce_payment' action='{$redirectData->getAction()}' method='{$redirectData->getMethod()}'>";
+		foreach ( $redirectData->getInputs() as $name => $value ) {
+			$html .= "<input type='hidden' name='{$name}' value='$value'>";
+		}
+		$html .= "</form><script> setTimeout(function() { jQuery('#bina_woocommerce_payment').submit(); }, 300); </script>";
+		$html .= "<p style='text-align: center; font-weight:bold; margin:50px auto;'>".__('Dear user, you are connecting to the payment gateway, Please wait...', 'bina-woocommerce-payment')."</p>";
+
+		return $html;
+	}
+
+	public function verify()
+	{
+		// Get Request
+		$order_id = absint($_REQUEST['wc_order']) ?? 0;
+
+		// Check Cancel Transaction
+		if ( empty($order_id) ) {
+			wc_add_notice(__('Order ID is Empty! System can`t find your order data.', 'bina-woocommerce-payment'), 'error');
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
+
+		// Get Order
+		$order = new WC_Order($order_id);
+
+		// Check Order is Unpaid
+		if ( $order->is_paid() ) {
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
+
+		// Verify Transaction
+		try {
+			$payment = new Payment($this->paymentConfig());
+			$payment->amount($this->getTotal($order));
+
+			// Add Order Note
+			$note = sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId());
+			$order->add_order_note($note, 1);
+
+			// Process Order Transaction
+			$order->payment_complete($receipt->getReferenceId());
+			$order->save();
+
+			// Redirect to Thank You Message
+			wc_add_notice(sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId()));
+			wp_redirect(add_query_arg('wc_status', 'success', $this->get_return_url($order)));
+			exit;
+		} catch ( Throwable $e ) {
+			wc_add_notice($e->getMessage(), 'error');
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
 	}
 }

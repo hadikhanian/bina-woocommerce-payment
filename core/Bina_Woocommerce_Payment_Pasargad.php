@@ -2,7 +2,11 @@
 
 namespace Bina\WoocommercePayment\Core;
 
+use WC_Order;
+use Throwable;
 use WC_Payment_Gateway;
+use Shetabit\Multipay\Payment;
+use Shetabit\Multipay\Invoice;
 
 class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 {
@@ -22,8 +26,8 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 		$settings = $this->settings();
 
 		$config = [
-			'terminalId'   => array(
-				'title'       => __('Terminal ID', 'bina-woocommerce-payment'),
+			'merchantId'   => array(
+				'title'       => __('MerchantId ID', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
@@ -31,6 +35,18 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 			'terminalCode' => array(
 				'title'       => __('Terminal Code', 'bina-woocommerce-payment'),
 				'type'        => 'textarea',
+				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
+				'desc_tip'    => true,
+			),
+			'username'     => array(
+				'title'       => __('Username', 'bina-woocommerce-payment'),
+				'type'        => 'text',
+				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
+				'desc_tip'    => true,
+			),
+			'password'     => array(
+				'title'       => __('Password', 'bina-woocommerce-payment'),
+				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
 			),
@@ -43,5 +59,89 @@ class Bina_Woocommerce_Payment_Pasargad extends WC_Payment_Gateway
 		];
 
 		return array_merge($settings, $config);
+	}
+
+	public function process_admin_options()
+	{
+		parent::process_admin_options();
+		$pasargad_settings                = get_option('woocommerce_bina_woocommerce_payment_pasargad_settings');
+		$pasargad_settings['certificate'] = $_POST['woocommerce_bina_woocommerce_payment_pasargad_certificate'] ?? null;
+		update_option('woocommerce_bina_woocommerce_payment_pasargad_settings', $pasargad_settings);
+	}
+
+	public function make_invoice(WC_Order $order) : ?Invoice
+	{
+		try {
+			// Create New Invoice Object
+			$invoice = new Invoice;
+
+			// Set Invoice Amount.
+			if ( get_woocommerce_currency() === 'IRR' ) {
+				$invoice->amount($order->get_total());
+			} else {
+				$invoice->amount($order->get_total() * 10);
+			}
+
+			// Set Invoice Details
+			$invoice->detail([
+				'orderId' => $order->get_id(),
+				'name'    => $order->get_user()->first_name.' '.$order->get_user()->last_name,
+				'mobile'  => $order->get_billing_phone() ?? $order->get_user()->user_login,
+				'email'   => $order->get_billing_email() ?? $order->get_user()->user_email,
+			]);
+
+			return $invoice;
+		} catch ( Throwable $e ) {
+			return null;
+		}
+	}
+
+	public function verify()
+	{
+		// Get Request
+		$order_id = absint($_REQUEST['wc_order']) ?? 0;
+
+		// Check Cancel Transaction
+		if ( empty($order_id) ) {
+			wc_add_notice(__('Order ID is Empty! System can`t find your order data.', 'bina-woocommerce-payment'), 'error');
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
+
+		// Get Order
+		$order = new WC_Order($order_id);
+
+		// Check Order is Unpaid
+		if ( $order->is_paid() ) {
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
+
+		// Verify Transaction
+		try {
+			$payment = new Payment($this->paymentConfig());
+			if ( get_woocommerce_currency() === 'IRR' ) {
+				$receipt = $payment->amount($order->get_total())->verify();
+			} else {
+				$receipt = $payment->amount($order->get_total() * 10)->verify();
+			}
+
+			// Add Order Note
+			$note = sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId());
+			$order->add_order_note($note, 1);
+
+			// Process Order Transaction
+			$order->payment_complete($receipt->getReferenceId());
+			$order->save();
+
+			// Redirect to Thank You Message
+			wc_add_notice(sprintf(__('The transaction was successful. The tracking number is %s', 'bina-woocommerce-payment'), $receipt->getReferenceId()));
+			wp_redirect(add_query_arg('wc_status', 'success', $this->get_return_url($order)));
+			exit;
+		} catch ( Throwable $e ) {
+			wc_add_notice($e->getMessage(), 'error');
+			wp_redirect(wc_get_checkout_url());
+			exit;
+		}
 	}
 }

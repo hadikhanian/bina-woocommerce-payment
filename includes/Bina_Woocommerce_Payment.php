@@ -2,9 +2,6 @@
 
 namespace Bina\WoocommercePayment\Includes;
 
-use Bina\WoocommercePayment\Admin\Bina_Woocommerce_Payment_Admin;
-use Bina\WoocommercePayment\Public\Bina_Woocommerce_Payment_Public;
-
 /**
  * The file that defines the core plugin class
  *

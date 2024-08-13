@@ -4,16 +4,16 @@ namespace Bina\WoocommercePayment\Core;
 
 use WC_Payment_Gateway;
 
-class Bina_Woocommerce_Payment_Rayanpay extends WC_Payment_Gateway
+class Bina_Woocommerce_Payment_Snapppay extends WC_Payment_Gateway
 {
 	use Bina_Woocommerce_Payment_Core;
 
 	public function __construct()
 	{
 		// Create the payment gateway
-		$this->id                 = 'bina_woocommerce_payment_rayanpay';
-		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Rayanpay', 'bina-woocommerce-payment');
-		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Rayanpay', 'bina-woocommerce-payment');
+		$this->id                 = 'bina_woocommerce_payment_snapppay';
+		$this->method_title       = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Snapppay', 'bina-woocommerce-payment');
+		$this->method_description = __('Bina Woocommerce Payment Method', 'bina-woocommerce-payment').' – '.__('Snapppay', 'bina-woocommerce-payment');
 		$this->construct();
 	}
 
@@ -22,20 +22,26 @@ class Bina_Woocommerce_Payment_Rayanpay extends WC_Payment_Gateway
 		$settings = $this->settings();
 
 		$config = [
-			'username' => array(
+			'username'      => array(
 				'title'       => __('Username', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
 			),
-			'password' => array(
+			'password'      => array(
 				'title'       => __('Password', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,
 			),
-			'clientId' => array(
-				'title'       => __('Client ID', 'bina-woocommerce-payment'),
+			'clientId'      => array(
+				'title'       => __('Client Id', 'bina-woocommerce-payment'),
+				'type'        => 'text',
+				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
+				'desc_tip'    => true,
+			),
+			'Client Secret' => array(
+				'title'       => __('Client Secret', 'bina-woocommerce-payment'),
 				'type'        => 'text',
 				'description' => __('Insert your payment gateway information.', 'bina-woocommerce-payment'),
 				'desc_tip'    => true,

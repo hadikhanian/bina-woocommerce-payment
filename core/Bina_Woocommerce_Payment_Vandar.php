@@ -32,4 +32,13 @@ class Bina_Woocommerce_Payment_Vandar extends WC_Payment_Gateway
 
 		return array_merge($settings, $config);
 	}
+
+	public function getTotal($order)
+	{
+		if ( get_woocommerce_currency() === 'IRR' ) {
+			return $order->get_total();
+		} else {
+			return $order->get_total() * 10;
+		}
+	}
 }
