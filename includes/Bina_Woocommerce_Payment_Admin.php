@@ -11,6 +11,8 @@ use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Sadad;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Saman;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Zibal;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Payfa;
+use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Jibit;
+use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Toman;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Atipay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Paypal;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Poolam;
@@ -18,6 +20,7 @@ use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Sepehr;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Yekpay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Sizpay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Vandar;
+use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Bitpay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Payping;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Digipay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Nextpay;
@@ -29,6 +32,8 @@ use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Pasargad;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Zarinpal;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Sepordeh;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Rayanpay;
+use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Gooyapay;
+use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Snapppay;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Etebarino;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Fanavacard;
 use Bina\WoocommercePayment\Core\Bina_Woocommerce_Payment_Behpardakht;
@@ -150,6 +155,12 @@ class Bina_Woocommerce_Payment_Admin
 		$methods[] = Bina_Woocommerce_Payment_Aqayepardakht::class;
 		$methods[] = Bina_Woocommerce_Payment_Azki::class;
 		$methods[] = Bina_Woocommerce_Payment_Payfa::class;
+		$methods[] = Bina_Woocommerce_Payment_Gooyapay::class;
+		$methods[] = Bina_Woocommerce_Payment_Jibit::class;
+		$methods[] = Bina_Woocommerce_Payment_Toman::class;
+		$methods[] = Bina_Woocommerce_Payment_Bitpay::class;
+		$methods[] = Bina_Woocommerce_Payment_Snapppay::class;
+
 
 		return $methods;
 	}

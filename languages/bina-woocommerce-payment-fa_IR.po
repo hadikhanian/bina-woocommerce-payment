@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: bina-woocommerce-payment 1.0.0\n"
 "Report-Msgid-Bugs-To: https://plugin_website/\n"
 "POT-Creation-Date: 2023-04-30 21:47+0000\n"
-"PO-Revision-Date: 2023-06-08 07:27+0000\n"
+"PO-Revision-Date: 2024-08-13 15:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: فارسی\n"
 "Language: fa_IR\n"
@@ -24,13 +24,22 @@ msgstr "شناسه تایید کننده"
 msgid "Account ID"
 msgstr "شناسه حساب کاربری"
 
-#: core/Bina_Woocommerce_Payment_Atipay.php:25
 #: core/Bina_Woocommerce_Payment_Payfa.php:26
+#: core/Bina_Woocommerce_Payment_Atipay.php:25
+#: core/Bina_Woocommerce_Payment_Jibit.php:26
 msgid "API Key"
 msgstr "کلید API"
 
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:15
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:16
+#: core/Bina_Woocommerce_Payment_Jibit.php:32
+msgid "API Secret"
+msgstr "رمز API"
+
+#: core/Bina_Woocommerce_Payment_Bitpay.php:26
+msgid "API Token"
+msgstr "توکن API"
+
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:18
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:19
 msgid "Asan Pardakht"
 msgstr "آسان پرداخت (آپ)"
 
@@ -38,6 +47,10 @@ msgstr "آسان پرداخت (آپ)"
 #: core/Bina_Woocommerce_Payment_Atipay.php:16
 msgid "Ati Pay"
 msgstr "آتی پی"
+
+#: core/Bina_Woocommerce_Payment_Toman.php:32
+msgid "Auth Code"
+msgstr "کد اعتبار سنجی - Auth Code"
 
 #: core/Bina_Woocommerce_Payment_Azki.php:15
 #: core/Bina_Woocommerce_Payment_Azki.php:16
@@ -53,98 +66,125 @@ msgstr "به پرداخت (ملت)"
 msgid "Bina WooCommerce Payment"
 msgstr "@ افزونه درگاه پرداخت ووکامرس بینا"
 
-#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:15
-#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:16
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:15
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:16
-#: core/Bina_Woocommerce_Payment_Atipay.php:15
-#: core/Bina_Woocommerce_Payment_Atipay.php:16
 #: core/Bina_Woocommerce_Payment_Azki.php:15
 #: core/Bina_Woocommerce_Payment_Azki.php:16
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:15
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:16
-#: core/Bina_Woocommerce_Payment_Digipay.php:15
-#: core/Bina_Woocommerce_Payment_Digipay.php:16
-#: core/Bina_Woocommerce_Payment_Etebarino.php:15
-#: core/Bina_Woocommerce_Payment_Etebarino.php:16
-#: core/Bina_Woocommerce_Payment_Fanavacard.php:15
-#: core/Bina_Woocommerce_Payment_Fanavacard.php:16
-#: core/Bina_Woocommerce_Payment_Idpay.php:15
-#: core/Bina_Woocommerce_Payment_Idpay.php:16
-#: core/Bina_Woocommerce_Payment_Irankish.php:15
-#: core/Bina_Woocommerce_Payment_Irankish.php:16
 #: core/Bina_Woocommerce_Payment_Local.php:18
 #: core/Bina_Woocommerce_Payment_Local.php:19
-#: core/Bina_Woocommerce_Payment_Nextpay.php:15
-#: core/Bina_Woocommerce_Payment_Nextpay.php:16
-#: core/Bina_Woocommerce_Payment_Parsian.php:15
-#: core/Bina_Woocommerce_Payment_Parsian.php:16
-#: core/Bina_Woocommerce_Payment_Pasargad.php:15
-#: core/Bina_Woocommerce_Payment_Pasargad.php:16
-#: core/Bina_Woocommerce_Payment_Payfa.php:15
-#: core/Bina_Woocommerce_Payment_Payfa.php:16
+#: core/Bina_Woocommerce_Payment_Vandar.php:15
+#: core/Bina_Woocommerce_Payment_Vandar.php:16
+#: core/Bina_Woocommerce_Payment_Sepehr.php:15
+#: core/Bina_Woocommerce_Payment_Sepehr.php:16
 #: core/Bina_Woocommerce_Payment_Payir.php:15
 #: core/Bina_Woocommerce_Payment_Payir.php:16
-#: core/Bina_Woocommerce_Payment_Paypal.php:15
-#: core/Bina_Woocommerce_Payment_Paypal.php:16
-#: core/Bina_Woocommerce_Payment_Payping.php:15
-#: core/Bina_Woocommerce_Payment_Payping.php:16
 #: core/Bina_Woocommerce_Payment_Paystar.php:15
 #: core/Bina_Woocommerce_Payment_Paystar.php:16
 #: core/Bina_Woocommerce_Payment_Poolam.php:15
 #: core/Bina_Woocommerce_Payment_Poolam.php:16
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:15
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:16
-#: core/Bina_Woocommerce_Payment_Sadad.php:15
-#: core/Bina_Woocommerce_Payment_Sadad.php:16
-#: core/Bina_Woocommerce_Payment_Saman.php:15
-#: core/Bina_Woocommerce_Payment_Saman.php:16
+#: core/Bina_Woocommerce_Payment_Payfa.php:15
+#: core/Bina_Woocommerce_Payment_Payfa.php:16
+#: core/Bina_Woocommerce_Payment_Digipay.php:15
+#: core/Bina_Woocommerce_Payment_Digipay.php:16
+#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:15
+#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:16
+#: core/Bina_Woocommerce_Payment_Paypal.php:15
+#: core/Bina_Woocommerce_Payment_Paypal.php:16
 #: core/Bina_Woocommerce_Payment_Sep.php:15
 #: core/Bina_Woocommerce_Payment_Sep.php:16
-#: core/Bina_Woocommerce_Payment_Sepehr.php:15
-#: core/Bina_Woocommerce_Payment_Sepehr.php:16
+#: core/Bina_Woocommerce_Payment_Payping.php:15
+#: core/Bina_Woocommerce_Payment_Payping.php:16
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:15
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:16
 #: core/Bina_Woocommerce_Payment_Sepordeh.php:15
 #: core/Bina_Woocommerce_Payment_Sepordeh.php:16
-#: core/Bina_Woocommerce_Payment_Sizpay.php:15
-#: core/Bina_Woocommerce_Payment_Sizpay.php:16
-#: core/Bina_Woocommerce_Payment_Vandar.php:15
-#: core/Bina_Woocommerce_Payment_Vandar.php:16
+#: core/Bina_Woocommerce_Payment_Fanavacard.php:15
+#: core/Bina_Woocommerce_Payment_Fanavacard.php:16
+#: core/Bina_Woocommerce_Payment_Irankish.php:15
+#: core/Bina_Woocommerce_Payment_Irankish.php:16
+#: core/Bina_Woocommerce_Payment_Pasargad.php:19
+#: core/Bina_Woocommerce_Payment_Pasargad.php:20
+#: core/Bina_Woocommerce_Payment_Idpay.php:15
+#: core/Bina_Woocommerce_Payment_Idpay.php:16
 #: core/Bina_Woocommerce_Payment_Walleta.php:15
 #: core/Bina_Woocommerce_Payment_Walleta.php:16
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:18
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:19
 #: core/Bina_Woocommerce_Payment_Yekpay.php:15
 #: core/Bina_Woocommerce_Payment_Yekpay.php:16
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:15
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:16
+#: core/Bina_Woocommerce_Payment_Atipay.php:15
+#: core/Bina_Woocommerce_Payment_Atipay.php:16
+#: core/Bina_Woocommerce_Payment_Nextpay.php:15
+#: core/Bina_Woocommerce_Payment_Nextpay.php:16
+#: core/Bina_Woocommerce_Payment_Parsian.php:15
+#: core/Bina_Woocommerce_Payment_Parsian.php:16
+#: core/Bina_Woocommerce_Payment_Etebarino.php:15
+#: core/Bina_Woocommerce_Payment_Etebarino.php:16
 #: core/Bina_Woocommerce_Payment_Zibal.php:15
 #: core/Bina_Woocommerce_Payment_Zibal.php:16
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:15
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:16
+#: core/Bina_Woocommerce_Payment_Sadad.php:15
+#: core/Bina_Woocommerce_Payment_Sadad.php:16
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:15
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:16
+#: core/Bina_Woocommerce_Payment_Sizpay.php:15
+#: core/Bina_Woocommerce_Payment_Sizpay.php:16
+#: core/Bina_Woocommerce_Payment_Saman.php:15
+#: core/Bina_Woocommerce_Payment_Saman.php:16
+#: core/Bina_Woocommerce_Payment_Bitpay.php:15
+#: core/Bina_Woocommerce_Payment_Bitpay.php:16
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:15
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:16
+#: core/Bina_Woocommerce_Payment_Jibit.php:15
+#: core/Bina_Woocommerce_Payment_Jibit.php:16
+#: core/Bina_Woocommerce_Payment_Minipay.php:15
+#: core/Bina_Woocommerce_Payment_Minipay.php:16
+#: core/Bina_Woocommerce_Payment_Snapppay.php:15
+#: core/Bina_Woocommerce_Payment_Snapppay.php:16
+#: core/Bina_Woocommerce_Payment_Toman.php:15
+#: core/Bina_Woocommerce_Payment_Toman.php:16
 msgid "Bina Woocommerce Payment Method"
 msgstr "درگاه پرداخت ووکامرس بینا"
 
-#: core/Bina_Woocommerce_Payment_Pasargad.php:38
+#: core/Bina_Woocommerce_Payment_Bitpay.php:15
+#: core/Bina_Woocommerce_Payment_Bitpay.php:16
+msgid "Bitpay"
+msgstr "بیت پی"
+
+#: core/Bina_Woocommerce_Payment_Pasargad.php:54
 msgid "Certificate"
 msgstr "گواهینامه"
 
 #: core/Bina_Woocommerce_Payment_Digipay.php:38
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:38
 msgid "Client ID"
 msgstr "شناسه مشتری"
 
+#: core/Bina_Woocommerce_Payment_Snapppay.php:38
+msgid "Client Id"
+msgstr "شناسه مشتری - Client ID"
+
 #: core/Bina_Woocommerce_Payment_Digipay.php:44
+#: core/Bina_Woocommerce_Payment_Snapppay.php:44
 msgid "Client Secret"
 msgstr "رمز امنیتی مشتری"
 
-#: core/Bina_Woocommerce_Payment_Core.php:219
+#: core/Bina_Woocommerce_Payment_Toman.php:38
+msgid "Data"
+msgstr "دیتا - Data"
+
+#: core/Bina_Woocommerce_Payment_Core.php:639
 msgid "Dear user, you are connecting to the payment gateway, Please wait..."
 msgstr ""
 "کاربر گرامی، شما در حال اتصال به درگاه پرداخت می باشید، لطفا منتظر بمانید..."
 
-#: core/Bina_Woocommerce_Payment_Core.php:89
+#: core/Bina_Woocommerce_Payment_Core.php:94
 msgid "Description"
 msgstr "توضیحات"
 
-#: core/Bina_Woocommerce_Payment_Digipay.php:15
-#: core/Bina_Woocommerce_Payment_Digipay.php:16
 #: core/Bina_Woocommerce_Payment_Paystar.php:15
 #: core/Bina_Woocommerce_Payment_Paystar.php:16
+#: core/Bina_Woocommerce_Payment_Digipay.php:15
+#: core/Bina_Woocommerce_Payment_Digipay.php:16
 msgid "DigiPay"
 msgstr "دیجی پی"
 
@@ -153,9 +193,9 @@ msgstr "دیجی پی"
 msgid "Direct"
 msgstr "مستقیم"
 
-#: core/Bina_Woocommerce_Payment_Core.php:74
-#: core/Bina_Woocommerce_Payment_Core.php:75
 #: core/Bina_Woocommerce_Payment_Idpay.php:33
+#: core/Bina_Woocommerce_Payment_Core.php:79
+#: core/Bina_Woocommerce_Payment_Core.php:80
 msgid "Enable"
 msgstr "فعال"
 
@@ -165,7 +205,7 @@ msgstr ""
 "فعال / غیر فعال شدن محیط تست (Sandbox) درگاه پرداخت از این قسمت امکان پذیر "
 "است."
 
-#: core/Bina_Woocommerce_Payment_Core.php:78
+#: core/Bina_Woocommerce_Payment_Core.php:83
 msgid "Enable / Disable this payment method"
 msgstr "فعال / غیر فعال شدن درگاه پرداخت از این قسمت امکان پذیر است."
 
@@ -174,7 +214,7 @@ msgstr "فعال / غیر فعال شدن درگاه پرداخت از این ق
 msgid "Etebarino"
 msgstr "اعتباینو"
 
-#: core/Bina_Woocommerce_Payment_Core.php:236
+#: core/Bina_Woocommerce_Payment_Core.php:186
 msgid "Failed payment"
 msgstr "پرداخت ناموفق"
 
@@ -187,6 +227,11 @@ msgstr "فناوا کارت"
 msgid "Gateway ID"
 msgstr "شناسه درگاه"
 
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:15
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:16
+msgid "Gooyapay"
+msgstr "گویاپی"
+
 #. Author of the plugin
 msgid "Hadi Khanian"
 msgstr "هادی خانیان"
@@ -196,7 +241,7 @@ msgstr "هادی خانیان"
 msgid "https://www.binacity.com"
 msgstr "https://www.binacity.com"
 
-#: core/Bina_Woocommerce_Payment_Core.php:96
+#: core/Bina_Woocommerce_Payment_Core.php:101
 msgid "Icon URL"
 msgstr "نشانی URL آیکون درگاه"
 
@@ -205,75 +250,89 @@ msgstr "نشانی URL آیکون درگاه"
 msgid "ID Pay"
 msgstr "آی دی پی"
 
-#: core/Bina_Woocommerce_Payment_Core.php:100
+#: core/Bina_Woocommerce_Payment_Core.php:105
 msgid "Insert payment gateway icon url (60px * 60px)"
 msgstr ""
 "لطفا تصویر درگاه پرداخت را در سایز 60 پیکسل در 60 پیکسل وارد نمایید. "
 "(اختیاری)"
 
-#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:28
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:28
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:34
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:40
-#: core/Bina_Woocommerce_Payment_Atipay.php:27
 #: core/Bina_Woocommerce_Payment_Azki.php:28
 #: core/Bina_Woocommerce_Payment_Azki.php:34
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:28
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:34
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:40
+#: core/Bina_Woocommerce_Payment_Vandar.php:28
+#: core/Bina_Woocommerce_Payment_Sepehr.php:28
+#: core/Bina_Woocommerce_Payment_Payir.php:28
+#: core/Bina_Woocommerce_Payment_Paystar.php:28
+#: core/Bina_Woocommerce_Payment_Paystar.php:34
+#: core/Bina_Woocommerce_Payment_Poolam.php:28
+#: core/Bina_Woocommerce_Payment_Payfa.php:28
 #: core/Bina_Woocommerce_Payment_Digipay.php:28
 #: core/Bina_Woocommerce_Payment_Digipay.php:34
 #: core/Bina_Woocommerce_Payment_Digipay.php:40
 #: core/Bina_Woocommerce_Payment_Digipay.php:46
-#: core/Bina_Woocommerce_Payment_Etebarino.php:28
-#: core/Bina_Woocommerce_Payment_Etebarino.php:34
-#: core/Bina_Woocommerce_Payment_Etebarino.php:40
-#: core/Bina_Woocommerce_Payment_Etebarino.php:46
+#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:28
+#: core/Bina_Woocommerce_Payment_Paypal.php:28
+#: core/Bina_Woocommerce_Payment_Sep.php:28
+#: core/Bina_Woocommerce_Payment_Payping.php:27
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:28
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:34
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:40
+#: core/Bina_Woocommerce_Payment_Sepordeh.php:28
 #: core/Bina_Woocommerce_Payment_Fanavacard.php:27
 #: core/Bina_Woocommerce_Payment_Fanavacard.php:33
-#: core/Bina_Woocommerce_Payment_Idpay.php:28
 #: core/Bina_Woocommerce_Payment_Irankish.php:28
 #: core/Bina_Woocommerce_Payment_Irankish.php:34
 #: core/Bina_Woocommerce_Payment_Irankish.php:40
 #: core/Bina_Woocommerce_Payment_Irankish.php:46
+#: core/Bina_Woocommerce_Payment_Pasargad.php:32
+#: core/Bina_Woocommerce_Payment_Pasargad.php:38
+#: core/Bina_Woocommerce_Payment_Pasargad.php:44
+#: core/Bina_Woocommerce_Payment_Pasargad.php:50
+#: core/Bina_Woocommerce_Payment_Idpay.php:28
+#: core/Bina_Woocommerce_Payment_Walleta.php:28
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:31
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:37
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:43
+#: core/Bina_Woocommerce_Payment_Yekpay.php:28
+#: core/Bina_Woocommerce_Payment_Atipay.php:27
 #: core/Bina_Woocommerce_Payment_Nextpay.php:28
 #: core/Bina_Woocommerce_Payment_Nextpay.php:34
 #: core/Bina_Woocommerce_Payment_Nextpay.php:40
 #: core/Bina_Woocommerce_Payment_Nextpay.php:46
 #: core/Bina_Woocommerce_Payment_Parsian.php:28
-#: core/Bina_Woocommerce_Payment_Pasargad.php:28
-#: core/Bina_Woocommerce_Payment_Pasargad.php:34
-#: core/Bina_Woocommerce_Payment_Payfa.php:28
-#: core/Bina_Woocommerce_Payment_Payir.php:28
-#: core/Bina_Woocommerce_Payment_Paypal.php:28
-#: core/Bina_Woocommerce_Payment_Payping.php:27
-#: core/Bina_Woocommerce_Payment_Paystar.php:28
-#: core/Bina_Woocommerce_Payment_Paystar.php:34
-#: core/Bina_Woocommerce_Payment_Poolam.php:28
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:28
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:34
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:40
+#: core/Bina_Woocommerce_Payment_Etebarino.php:28
+#: core/Bina_Woocommerce_Payment_Etebarino.php:34
+#: core/Bina_Woocommerce_Payment_Etebarino.php:40
+#: core/Bina_Woocommerce_Payment_Etebarino.php:46
+#: core/Bina_Woocommerce_Payment_Zibal.php:28
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:28
 #: core/Bina_Woocommerce_Payment_Sadad.php:28
 #: core/Bina_Woocommerce_Payment_Sadad.php:34
 #: core/Bina_Woocommerce_Payment_Sadad.php:40
-#: core/Bina_Woocommerce_Payment_Saman.php:28
-#: core/Bina_Woocommerce_Payment_Sep.php:28
-#: core/Bina_Woocommerce_Payment_Sepehr.php:28
-#: core/Bina_Woocommerce_Payment_Sepordeh.php:28
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:28
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:34
+#: core/Bina_Woocommerce_Payment_Rayanpay.php:40
 #: core/Bina_Woocommerce_Payment_Sizpay.php:28
 #: core/Bina_Woocommerce_Payment_Sizpay.php:34
 #: core/Bina_Woocommerce_Payment_Sizpay.php:40
 #: core/Bina_Woocommerce_Payment_Sizpay.php:46
 #: core/Bina_Woocommerce_Payment_Sizpay.php:52
-#: core/Bina_Woocommerce_Payment_Vandar.php:28
-#: core/Bina_Woocommerce_Payment_Walleta.php:28
-#: core/Bina_Woocommerce_Payment_Yekpay.php:28
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:28
-#: core/Bina_Woocommerce_Payment_Zibal.php:28
+#: core/Bina_Woocommerce_Payment_Saman.php:28
+#: core/Bina_Woocommerce_Payment_Bitpay.php:28
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:28
+#: core/Bina_Woocommerce_Payment_Jibit.php:28
+#: core/Bina_Woocommerce_Payment_Jibit.php:34
+#: core/Bina_Woocommerce_Payment_Minipay.php:28
+#: core/Bina_Woocommerce_Payment_Snapppay.php:28
+#: core/Bina_Woocommerce_Payment_Snapppay.php:34
+#: core/Bina_Woocommerce_Payment_Snapppay.php:40
+#: core/Bina_Woocommerce_Payment_Snapppay.php:46
+#: core/Bina_Woocommerce_Payment_Toman.php:28
+#: core/Bina_Woocommerce_Payment_Toman.php:34
+#: core/Bina_Woocommerce_Payment_Toman.php:40
 msgid "Insert your payment gateway information."
 msgstr "لطفا اطلاعات درگاه پرداخت را وارد نمایید."
 
-#: core/Bina_Woocommerce_Payment_Pasargad.php:40
+#: core/Bina_Woocommerce_Payment_Pasargad.php:56
 msgid "Insert your payment gateway xml certificate string"
 msgstr "لطفا اطلاعات Certificate را در فرمت XML و به صورت یک رشته وارد نمایید."
 
@@ -282,39 +341,57 @@ msgstr "لطفا اطلاعات Certificate را در فرمت XML و به صو�
 msgid "Irankish"
 msgstr "ایران کیش"
 
+#: core/Bina_Woocommerce_Payment_Jibit.php:15
+#: core/Bina_Woocommerce_Payment_Jibit.php:16
+msgid "Jibit"
+msgstr "جیبت"
+
 #: core/Bina_Woocommerce_Payment_Azki.php:32
 #: core/Bina_Woocommerce_Payment_Sadad.php:26
 msgid "Key"
 msgstr "کلید"
 
-#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:26
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:38
 #: core/Bina_Woocommerce_Payment_Azki.php:26
-#: core/Bina_Woocommerce_Payment_Etebarino.php:38
+#: core/Bina_Woocommerce_Payment_Vandar.php:26
+#: core/Bina_Woocommerce_Payment_Payir.php:26
+#: core/Bina_Woocommerce_Payment_Poolam.php:26
+#: core/Bina_Woocommerce_Payment_Aqayepardakht.php:26
+#: core/Bina_Woocommerce_Payment_Payping.php:25
+#: core/Bina_Woocommerce_Payment_Sepordeh.php:26
 #: core/Bina_Woocommerce_Payment_Idpay.php:26
+#: core/Bina_Woocommerce_Payment_Walleta.php:26
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:41
+#: core/Bina_Woocommerce_Payment_Yekpay.php:26
 #: core/Bina_Woocommerce_Payment_Nextpay.php:38
 #: core/Bina_Woocommerce_Payment_Parsian.php:26
-#: core/Bina_Woocommerce_Payment_Payir.php:26
-#: core/Bina_Woocommerce_Payment_Payping.php:25
-#: core/Bina_Woocommerce_Payment_Poolam.php:26
-#: core/Bina_Woocommerce_Payment_Rayanpay.php:38
-#: core/Bina_Woocommerce_Payment_Sadad.php:32
-#: core/Bina_Woocommerce_Payment_Saman.php:26
-#: core/Bina_Woocommerce_Payment_Sepordeh.php:26
-#: core/Bina_Woocommerce_Payment_Sizpay.php:26
-#: core/Bina_Woocommerce_Payment_Vandar.php:26
-#: core/Bina_Woocommerce_Payment_Walleta.php:26
-#: core/Bina_Woocommerce_Payment_Yekpay.php:26
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:26
+#: core/Bina_Woocommerce_Payment_Etebarino.php:38
 #: core/Bina_Woocommerce_Payment_Zibal.php:26
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:26
+#: core/Bina_Woocommerce_Payment_Sadad.php:32
+#: core/Bina_Woocommerce_Payment_Sizpay.php:26
+#: core/Bina_Woocommerce_Payment_Saman.php:26
 msgid "Merchant ID"
 msgstr "شناسه پذیرنده"
+
+#: core/Bina_Woocommerce_Payment_Gooyapay.php:26
+#: core/Bina_Woocommerce_Payment_Minipay.php:26
+msgid "Merchant Id"
+msgstr "شناسه Merchant"
+
+#: core/Bina_Woocommerce_Payment_Pasargad.php:30
+msgid "MerchantId ID"
+msgstr "شناسه Merchant"
+
+#: core/Bina_Woocommerce_Payment_Minipay.php:15
+#: core/Bina_Woocommerce_Payment_Minipay.php:16
+msgid "Minipay"
+msgstr "مینی پی"
 
 #: core/Bina_Woocommerce_Payment_Aqayepardakht.php:32
 #: core/Bina_Woocommerce_Payment_Paypal.php:32
 #: core/Bina_Woocommerce_Payment_Sepordeh.php:32
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:32
 #: core/Bina_Woocommerce_Payment_Zibal.php:32
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:32
 msgid "Mode"
 msgstr "حالت"
 
@@ -326,18 +403,20 @@ msgstr "نکست پی"
 #: core/Bina_Woocommerce_Payment_Aqayepardakht.php:36
 #: core/Bina_Woocommerce_Payment_Paypal.php:36
 #: core/Bina_Woocommerce_Payment_Sepordeh.php:36
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:36
 #: core/Bina_Woocommerce_Payment_Zibal.php:36
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:36
 msgid "Normal"
 msgstr "نرمال (پیش فرض)"
 
-#: core/Bina_Woocommerce_Payment_Core.php:143
+#: core/Bina_Woocommerce_Payment_Pasargad.php:106
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:58
+#: core/Bina_Woocommerce_Payment_Core.php:651
 msgid "Order ID is Empty! System can`t find your order data."
 msgstr ""
 "شناسه سفارش بعد از بازگشت از درگاه یافت نشد و سیستم قادر به انجام این عملیات "
 "نمی باشد."
 
-#: core/Bina_Woocommerce_Payment_Core.php:233
+#: core/Bina_Woocommerce_Payment_Core.php:183
 msgid "Order Number"
 msgstr "شماره سفارش"
 
@@ -346,20 +425,22 @@ msgstr "شماره سفارش"
 msgid "Parsian"
 msgstr "پارسیان"
 
-#: core/Bina_Woocommerce_Payment_Pasargad.php:15
-#: core/Bina_Woocommerce_Payment_Pasargad.php:16
+#: core/Bina_Woocommerce_Payment_Pasargad.php:19
+#: core/Bina_Woocommerce_Payment_Pasargad.php:20
 msgid "Pasargad"
 msgstr "پاسارگاد"
 
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:32
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:32
 #: core/Bina_Woocommerce_Payment_Digipay.php:32
-#: core/Bina_Woocommerce_Payment_Etebarino.php:32
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:32
 #: core/Bina_Woocommerce_Payment_Fanavacard.php:31
 #: core/Bina_Woocommerce_Payment_Irankish.php:32
+#: core/Bina_Woocommerce_Payment_Pasargad.php:48
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:35
 #: core/Bina_Woocommerce_Payment_Nextpay.php:32
+#: core/Bina_Woocommerce_Payment_Etebarino.php:32
 #: core/Bina_Woocommerce_Payment_Rayanpay.php:32
 #: core/Bina_Woocommerce_Payment_Sizpay.php:44
+#: core/Bina_Woocommerce_Payment_Snapppay.php:32
 msgid "Password"
 msgstr "کلمه عبور"
 
@@ -373,7 +454,7 @@ msgstr "پی دات آی آر"
 msgid "Pay Ping"
 msgstr "پی پینگ"
 
-#: core/Bina_Woocommerce_Payment_Core.php:234
+#: core/Bina_Woocommerce_Payment_Core.php:184
 msgid "Payable amount"
 msgstr "مبلغ قابل پرداخت"
 
@@ -382,8 +463,8 @@ msgstr "مبلغ قابل پرداخت"
 msgid "Payfa"
 msgstr "پی فا"
 
-#: core/Bina_Woocommerce_Payment_Core.php:130
 #: core/Bina_Woocommerce_Payment_Local.php:42
+#: core/Bina_Woocommerce_Payment_Core.php:136
 msgid "Payment Error"
 msgstr "خطای ارتباط با درگاه"
 
@@ -417,8 +498,8 @@ msgid "Saman"
 msgstr "سامان"
 
 #: core/Bina_Woocommerce_Payment_Aqayepardakht.php:37
-#: core/Bina_Woocommerce_Payment_Idpay.php:32
 #: core/Bina_Woocommerce_Payment_Paypal.php:37
+#: core/Bina_Woocommerce_Payment_Idpay.php:32
 #: core/Bina_Woocommerce_Payment_Zarinpal.php:38
 msgid "Sandbox"
 msgstr "محیط تست (Sandbox)"
@@ -426,8 +507,8 @@ msgstr "محیط تست (Sandbox)"
 #: core/Bina_Woocommerce_Payment_Aqayepardakht.php:39
 #: core/Bina_Woocommerce_Payment_Paypal.php:39
 #: core/Bina_Woocommerce_Payment_Sepordeh.php:39
-#: core/Bina_Woocommerce_Payment_Zarinpal.php:40
 #: core/Bina_Woocommerce_Payment_Zibal.php:39
+#: core/Bina_Woocommerce_Payment_Zarinpal.php:40
 msgid "Select a payment gateway mode."
 msgstr "لطفا حالت درگاه پرداخت را انتخاب نمایید."
 
@@ -446,15 +527,19 @@ msgstr "سپهر"
 msgid "Sepordeh"
 msgstr "سپرده"
 
-#: core/Bina_Woocommerce_Payment_Core.php:71
+#: core/Bina_Woocommerce_Payment_Core.php:76
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: core/Bina_Woocommerce_Payment_Core.php:92
+#: core/Bina_Woocommerce_Payment_Toman.php:26
+msgid "Shop Slug"
+msgstr "Slug فروشگاه"
+
+#: core/Bina_Woocommerce_Payment_Core.php:97
 msgid "Show this text in payment method description in checkout page"
 msgstr "این توضیحات در زیر عنوان درگاه و در قسمت توضیحات نمایش داده خواهد شد."
 
-#: core/Bina_Woocommerce_Payment_Core.php:85
+#: core/Bina_Woocommerce_Payment_Core.php:90
 msgid "Show this title in checkout page"
 msgstr "این عنوان در صفحه پرداخت نمایش داده میشود."
 
@@ -471,22 +556,26 @@ msgstr "امضا (Sign Key)"
 msgid "Sizpay"
 msgstr "سیز پی"
 
-#: core/Bina_Woocommerce_Payment_Core.php:235
+#: core/Bina_Woocommerce_Payment_Snapppay.php:15
+#: core/Bina_Woocommerce_Payment_Snapppay.php:16
+msgid "Snapppay"
+msgstr "اسنپ پی"
+
+#: core/Bina_Woocommerce_Payment_Core.php:185
 msgid "Successful payment"
 msgstr "پرداخت موفق"
 
-#: core/Bina_Woocommerce_Payment_Pasargad.php:32
+#: core/Bina_Woocommerce_Payment_Pasargad.php:36
 msgid "Terminal Code"
 msgstr "کد ترمینال"
 
+#: core/Bina_Woocommerce_Payment_Sepehr.php:26
+#: core/Bina_Woocommerce_Payment_Sep.php:26
 #: core/Bina_Woocommerce_Payment_Behpardakht.php:38
-#: core/Bina_Woocommerce_Payment_Etebarino.php:44
 #: core/Bina_Woocommerce_Payment_Irankish.php:26
 #: core/Bina_Woocommerce_Payment_Nextpay.php:44
-#: core/Bina_Woocommerce_Payment_Pasargad.php:26
+#: core/Bina_Woocommerce_Payment_Etebarino.php:44
 #: core/Bina_Woocommerce_Payment_Sadad.php:38
-#: core/Bina_Woocommerce_Payment_Sep.php:26
-#: core/Bina_Woocommerce_Payment_Sepehr.php:26
 #: core/Bina_Woocommerce_Payment_Sizpay.php:32
 msgid "Terminal ID"
 msgstr "شناسه ترمینال"
@@ -496,17 +585,21 @@ msgstr "شناسه ترمینال"
 msgid "Test Method"
 msgstr "پایانه تست پرداخت"
 
-#: core/Bina_Woocommerce_Payment_Core.php:231
+#: core/Bina_Woocommerce_Payment_Core.php:181
 msgid "Test Payment Gateway"
 msgstr "درگاه پرداخت تست"
 
-#: core/Bina_Woocommerce_Payment_Core.php:167
-#: core/Bina_Woocommerce_Payment_Core.php:175
+#: core/Bina_Woocommerce_Payment_Pasargad.php:130
+#: core/Bina_Woocommerce_Payment_Pasargad.php:138
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:82
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:90
+#: core/Bina_Woocommerce_Payment_Core.php:671
+#: core/Bina_Woocommerce_Payment_Core.php:679
 #, php-format
 msgid "The transaction was successful. The tracking number is %s"
 msgstr "تراکنش با موفقیت انجام شد. شماره پیگیری پرداخت برابر %s می باشد."
 
-#: core/Bina_Woocommerce_Payment_Core.php:232
+#: core/Bina_Woocommerce_Payment_Core.php:182
 msgid ""
 "This gateway is only for testing the validity of the payment process and "
 "canceling payments."
@@ -521,18 +614,25 @@ msgstr ""
 "این افزونه به شما کمک خواهد کرد تا همه درگاه پرداخت های ایرانی، رمز ارز و "
 "بین اللملی را با یک افزونه به ووکارس و فروشگاه خود متصل کنید."
 
-#: core/Bina_Woocommerce_Payment_Core.php:82
+#: core/Bina_Woocommerce_Payment_Core.php:87
 msgid "Title"
 msgstr "عنوان"
 
-#: core/Bina_Woocommerce_Payment_Asanpardakht.php:26
-#: core/Bina_Woocommerce_Payment_Behpardakht.php:26
+#: core/Bina_Woocommerce_Payment_Toman.php:15
+#: core/Bina_Woocommerce_Payment_Toman.php:16
+msgid "Toman"
+msgstr "تومن"
+
 #: core/Bina_Woocommerce_Payment_Digipay.php:26
-#: core/Bina_Woocommerce_Payment_Etebarino.php:26
+#: core/Bina_Woocommerce_Payment_Behpardakht.php:26
 #: core/Bina_Woocommerce_Payment_Fanavacard.php:25
+#: core/Bina_Woocommerce_Payment_Pasargad.php:42
+#: core/Bina_Woocommerce_Payment_Asanpardakht.php:29
 #: core/Bina_Woocommerce_Payment_Nextpay.php:26
+#: core/Bina_Woocommerce_Payment_Etebarino.php:26
 #: core/Bina_Woocommerce_Payment_Rayanpay.php:26
 #: core/Bina_Woocommerce_Payment_Sizpay.php:38
+#: core/Bina_Woocommerce_Payment_Snapppay.php:26
 msgid "Username"
 msgstr "نام کاربری"
 
